@@ -31,10 +31,16 @@ local SettingTab = Utility:Tab({
 })
 
 -- ✅ ADD SECTIONS
-local HomeSection = HomeTab:Section({
+HomeTab:Section({
     Title = "Home Section",
     TextXAlignment = "Left",
     TextSize = 20
+})
+
+HomeTab:Section({
+    Title = "Main",
+    TextXAlignment = "Left",
+    TextSize = 16
 })
 
 HomeTab:Toggle({
@@ -44,17 +50,17 @@ HomeTab:Toggle({
     Type = "Checkbox",
     Default = false,
     Callback = function(state)
-        
+        return state
     end
 })
 
-local ToolSection = ToolTab:Section({
+ToolTab:Section({
     Title = "Tools Section",
     TextXAlignment = "Left",
     TextSize = 20
 })
 
-local SettingSection = SettingTab:Section({
+SettingTab:Section({
     Title = "Setting Section",
     TextXAlignment = "Left",
     TextSize = 20

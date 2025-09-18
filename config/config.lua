@@ -1,9 +1,9 @@
 Version = "1.6.41"
 
--- ✅ FIXED URL (hapus spasi yang bikin error)
 WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
 
--- 🐠 THEME — "Oceanic"
+-- Window Theme
+
 WindUI:AddTheme({
     Name = "Oceanic",
     Accent = Color3.fromRGB(0, 180, 255), -- Bright ocean cyan
@@ -17,7 +17,7 @@ WindUI:AddTheme({
     Input = "#0c2035",                    -- Input background
 })
 
--- ✅ CREATE WINDOW
+-- Initialize Windows
 Window = WindUI:CreateWindow({
     Title = "Fishing Hub",
     Icon = "fish", -- 🐟 Valid Lucide icon
@@ -31,7 +31,7 @@ Window = WindUI:CreateWindow({
     Transparent = true,
     Theme = "Oceanic",
     Resizable = true,
-    SideBarWidth = 200,
+    SideBarWidth = 175,
     BackgroundImageTransparency = 0.42,
     HideSearchBar = true,
     ScrollBarEnabled = false,
@@ -44,3 +44,14 @@ Window = WindUI:CreateWindow({
         end,
     },
 })
+
+-- Utilities
+
+ReplicatedStorage = game:GetService("ReplicatedStorage")
+Players = game:GetService("Players")
+CurrentPlayer = Players.LocalPlayer
+Remote = ReplicatedStorage:WaitForChild("Packages"):WaitForChild("_Index"):WaitForChild("sleitnick_net@0.2.0"):WaitForChild("net")
+PickRod = Remote:WaitForChild("RE/EquipToolFromHotbar")
+ChargedRod = Remote:WaitForChild("RF/ChargeFishingRod")
+FishingIndicator = Remote:WaitForChild("RF/RequestFishingMinigameStarted")
+FishingCompleted = Remote:WaitForChild("RE/FishingCompleted")
