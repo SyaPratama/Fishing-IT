@@ -80,6 +80,6 @@ FishingCompleted = Remote:WaitForChild("RE/FishingCompleted")
 
 -- Variabel
 ActiveAutoFishing = false
-ChargeRodSpeed = 0.1
-MinCoordinateFishing = -10
-MaxCoordinateFishing = 10
+ChargeRodDelay = 0.1
+BaseX,BaseY = -0.75, 0.99
+CoordRange = 0.005

@@ -1,36 +1,31 @@
 function GetRandomCordinate()
-    return math.random(MinCoordinateFishing * 1000, MaxCoordinateFishing * 1000) / 1000
+    return math.random(-CoordRange*10000, CoordRange*10000)/10000
 end
 
 function CastFishingRod()
     -- Get server time for charging
-    local chargeTime = workspace:GetServerTimeNow()
-    
-    -- Equip Fishing Rod
-    PickRod:FireServer(1)
-    task.wait(0.1)
-    
-    -- Charge the rod
-    ChargedRod:InvokeServer(chargeTime)
-    
-    -- Short delay
-    task.wait(0.1)
+    pcall(function ()
+        PickRod:FireServer(1)
+    end)
+
+    local timestamp = workspace:GetServerTimeNow()
+    pcall(function()
+        ChargeRod:InvokeServer(timestamp)
+    end)
+
+    task.wait(ChargeRodDelay)
 
     -- Random Coordinate
-    local x = GetRandomCordinate()
-    local y = GetRandomCordinate()
+    local x = BaseX + GetRandomCordinate()
+    local y = BaseY + GetRandomCordinate()
+    
     print("Fishing coordinates:", x, y)
 
     local success, failed = pcall(function()
         return FishingIndicator:InvokeServer(x, y)
     end)
 
-    if success then
-        print("✅ Fishing minigame started!")
-        
-        -- Wait for charge speed
-        task.wait(ChargeRodSpeed)
-
+    if success then                -- Wait for charge speed
         -- Complete the fishing
         task.wait(0.3)
         pcall(function()
