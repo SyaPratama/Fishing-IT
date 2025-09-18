@@ -22,11 +22,10 @@ function CastFishingRod()
     print("Fishing coordinates:", x, y)
 
     local success, failed = pcall(function()
-        return FishingIndicator:InvokeServer(x, y)
+        FishingIndicator:InvokeServer(x, y)
     end)
 
-    if success then                -- Wait for charge speed
-        -- Complete the fishing
+    if success then
         task.wait(0.3)
         pcall(function()
             FishingCompleted:FireServer()
