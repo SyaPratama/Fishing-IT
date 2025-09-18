@@ -47,9 +47,9 @@ HomeTab:Slider({
     Title = "Bypass Charge Rod",
     Step = 0.1,
     Value = {
-        Min = 0.1,
-        Max = 10,
-        Default = 0.5
+        Min = 0,
+        Max = 2,
+        Default = 0.1,
     },
     Callback = function(v)
         ChargeRodSpeed = v
@@ -65,7 +65,7 @@ HomeTab:Toggle({
     Callback = function(v)
         ActiveAutoFishing = v
         if v then
-            AutoFishing()
+            AutoFishing()  
         end
     end
 })
