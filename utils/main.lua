@@ -3,59 +3,58 @@ function GetRandomCordinate()
 end
 
 function CastFishingRod()
-    -- ServerTime
-    local chargeTime = workspace.GetServerTimeNow()
+    -- Get server time for charging
+    local chargeTime = workspace:GetServerTimeNow()
+    
     -- Equip Fishing Rod
     PickRod:FireServer(1)
-    ChargeRod:InvokeServer(chargeTime)
-
-    -- Delay
+    task.wait(0.1)
+    
+    -- Charge the rod
+    ChargedRod:InvokeServer(chargeTime)
+    
+    -- Short delay
     task.wait(0.1)
 
     -- Random Coordinate
     local x = GetRandomCordinate()
     local y = GetRandomCordinate()
+    print("Fishing coordinates:", x, y)
 
-    print(x,y)
-
-    local success, failed = pcall(function ()
-        return FishingIndicator:InvokeServer(x,y)
+    local success, failed = pcall(function()
+        return FishingIndicator:InvokeServer(x, y)
     end)
 
     if success then
-        task.spawn(
-            function ()
-                task.wait(ChargeRodSpeed)
+        print("✅ Fishing minigame started!")
+        
+        -- Wait for charge speed
+        task.wait(ChargeRodSpeed)
 
-                -- Current timestamp
-                pcall(function ()
-                  ChargedRod:InvokeServer(chargeTime)
-                end)
+        -- Complete the fishing
+        task.wait(0.3)
+        pcall(function()
+            FishingCompleted:FireServer()
+        end)
 
-                -- Delay 
-                task.wait(0.3)
-                pcall(function ()
-                    FishingCompleted:FireServer()
-                end)
-
-                print("Fishing completed!")
-            end
-        )
+        print("✅ Fishing completed!")
     else
-        print("Failed to start fishing:", failed)
+        print("❌ Failed to start fishing:", failed)
         WindUI:Notify({
             Title = "Error",
             Content = "Failed to start fishing minigame",
-            Duration = 2,
+            Duration = 2.5,
+            Icon = "circle-x"
         })
     end
 end
 
+
 function AutoFishing()
-    spawn(function ()
-        while ActiveAutoFishing do
+    while ActiveAutoFishing do
+        pcall(function (...)
             CastFishingRod()
             task.wait(2.5)
-        end
-    end)
+        end)
+    end
 end

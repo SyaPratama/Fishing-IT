@@ -1,19 +1,19 @@
-Version = "1.6.41"
+Version = "1.6.51"
 
 WindUI = loadstring(game:HttpGetAsync("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
 
 -- Window Theme
 WindUI:AddTheme({
     Name = "Oceanic",
-    Accent = "#00b4ff",           -- Bright ocean cyan
-    Text = "#ffffff",             -- White text
-    Background = "#0a1a2a",       -- Deep ocean blue
-    Button = "#0d2a40",           -- Darker blue button
-    Icon = "#80d0ff",             -- Light cyan icons
-    Outline = "#33aaff",          -- Glowing outline
-    Placeholder = "#66b3ff",      -- Soft blue placeholder
-    Dialog = "#0f253a",           -- Slightly lighter dialog bg
-    Input = "#0c2035",            -- Input background
+    Accent = "#00b4ff",      -- Bright ocean cyan
+    Text = "#ffffff",        -- White text
+    Background = "#0a1a2a",  -- Deep ocean blue
+    Button = "#0d2a40",      -- Darker blue button
+    Icon = "#80d0ff",        -- Light cyan icons
+    Outline = "#33aaff",     -- Glowing outline
+    Placeholder = "#66b3ff", -- Soft blue placeholder
+    Dialog = "#0f253a",      -- Slightly lighter dialog bg
+    Input = "#0c2035",       -- Input background
 })
 
 -- Initialize Windows

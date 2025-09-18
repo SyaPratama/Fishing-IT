@@ -65,7 +65,7 @@ HomeTab:Toggle({
     Callback = function(v)
         ActiveAutoFishing = v
         if v then
-            AutoFishing()  
+            AutoFishing()
         end
     end
 })
