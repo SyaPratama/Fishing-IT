@@ -1,5 +1,5 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/main/config/config.lua"))()
-
+loadstring(game:HttpGet("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/main/utils/main.lua"))()
 
 local Main = Window:Section({
     Title = "Main",

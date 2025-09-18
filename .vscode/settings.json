@@ -4,6 +4,14 @@
         "getRandomCoordinated",
         "task",
         "tick",
-        "spawn"
+        "spawn",
+        "Color3",
+        "Vector2",
+        "UDim2",
+        "workspace"
+    ],
+    "Lua.diagnostics.disable": [
+        "deprecated",
+        "undefined-global"
     ]
 }

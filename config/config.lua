@@ -1,6 +1,6 @@
 Version = "1.6.41"
 
-WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
+WindUI = loadstring(game:HttpGetAsync("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
 
 -- Window Theme
 
@@ -58,3 +58,6 @@ FishingCompleted = Remote:WaitForChild("RE/FishingCompleted")
 
 -- Variabel
 ActiveAutoFishing = false
+ChargeRodSpeed = 0.5
+MinCoordinateFishing = -5
+MaxCoordinateFishing = 5
