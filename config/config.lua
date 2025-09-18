@@ -2,24 +2,22 @@ Version = "1.6.51"
 
 WindUI = loadstring(game:HttpGetAsync("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
 
--- Window Theme
 WindUI:AddTheme({
     Name = "Oceanic",
-    Accent = "#00b4ff",      -- Bright ocean cyan
-    Text = "#ffffff",        -- White text
-    Background = "#0a1a2a",  -- Deep ocean blue
-    Button = "#0d2a40",      -- Darker blue button
-    Icon = "#80d0ff",        -- Light cyan icons
-    Outline = "#33aaff",     -- Glowing outline
-    Placeholder = "#66b3ff", -- Soft blue placeholder
-    Dialog = "#0f253a",      -- Slightly lighter dialog bg
-    Input = "#0c2035",       -- Input background
+    Accent = "#00b4ff",
+    Text = "#ffffff",
+    Background = "#0a1a2a",
+    Button = "#0d2a40",
+    Icon = "#80d0ff",
+    Outline = "#33aaff",
+    Placeholder = "#66b3ff",
+    Dialog = "#0f253a",
+    Input = "#0c2035",
 })
 
--- Initialize Windows
 Window = WindUI:CreateWindow({
     Title = "Fishing Hub",
-    Icon = "fish", -- 🐟 Valid Lucide icon
+    Icon = "fish",
     Author = "By Tama",
     Folder = "Fishing",
 
@@ -33,7 +31,7 @@ Window = WindUI:CreateWindow({
     SideBarWidth = 175,
     BackgroundImageTransparency = 0.42,
     HideSearchBar = true,
-    ScrollBarEnabled = false,
+    ScrollBarEnabled = true,
 
     User = {
         Enabled = true,
@@ -50,7 +48,15 @@ WindUI:Notify({
     Duration = 2,
 })
 
--- Utilities
+local UIS = game:GetService("UserInputService")
+local toggleKey = Enum.KeyCode.G
+
+UIS.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    if input.KeyCode == toggleKey then
+        Window:Toggle()
+    end
+end)
 
 ReplicatedStorage = game:GetService("ReplicatedStorage")
 Players = game:GetService("Players")
@@ -61,25 +67,25 @@ ChargedRod = Remote:WaitForChild("RF/ChargeFishingRod")
 FishingIndicator = Remote:WaitForChild("RF/RequestFishingMinigameStarted")
 FishingCompleted = Remote:WaitForChild("RE/FishingCompleted")
 
--- Variabel
+-- Variables
 ActiveAutoFishing = false
 ChargeRodSpeed = 0.1
 MinCoordinateFishing = -10
 MaxCoordinateFishing = 10
+CoordRange = 0.02
+MiniGameDelay = 2.2 
+BaseX = -0.75
+BaseY = 0.99
 
--- Utilities
+-- Animation Loading
+AnimationsFolder = ReplicatedStorage.Modules.Animations
+AnimCast = AnimationsFolder:FindFirstChild("CastFromFullChargePosition1Hand")
+AnimChargeFinish = AnimationsFolder:FindFirstChild("FinishChargingRod1Hand")
+AnimEasyReel = AnimationsFolder:FindFirstChild("EasyFishReel")
+AnimCatch = AnimationsFolder:FindFirstChild("CaughtFish1")
+AnimIdle = AnimationsFolder:FindFirstChild("FishingRodCharacterIdle2")
+AnimFailure = AnimationsFolder:FindFirstChild("FishingFailure")
 
-ReplicatedStorage = game:GetService("ReplicatedStorage")
-Players = game:GetService("Players")
-CurrentPlayer = Players.LocalPlayer
-Remote = ReplicatedStorage:WaitForChild("Packages"):WaitForChild("_Index"):WaitForChild("sleitnick_net@0.2.0"):WaitForChild("net")
-PickRod = Remote:WaitForChild("RE/EquipToolFromHotbar")
-ChargedRod = Remote:WaitForChild("RF/ChargeFishingRod")
-FishingIndicator = Remote:WaitForChild("RF/RequestFishingMinigameStarted")
-FishingCompleted = Remote:WaitForChild("RE/FishingCompleted")
-
--- Variabel
-ActiveAutoFishing = false
-ChargeRodDelay = 0.1
-BaseX,BaseY = -0.75, 0.99
-CoordRange = 0.005
+-- Character and Humanoid setup
+Character = CurrentPlayer.Character or CurrentPlayer.CharacterAdded:Wait()
+Humanoid = Character:FindFirstChild("Humanoid")

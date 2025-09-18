@@ -35,6 +35,7 @@ function  Start()
         end)
     end
 end
+Start()
     
 local args = {
 	-0.5718746185302734,

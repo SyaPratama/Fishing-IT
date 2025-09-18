@@ -1,6 +1,5 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/main/config/config.lua"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/main/utils/main.lua"))()
 
+-- UI Sections
 local Main = Window:Section({
     Title = "Main",
     Opened = true,
@@ -11,7 +10,7 @@ local Utility = Window:Section({
     Opened = true,
 })
 
--- ✅ ADD TABS — jangan pakai Locked biar bisa diklik
+-- Tabs
 local HomeTab = Main:Tab({
     Title = "Home",
     Icon = "house",
@@ -30,7 +29,7 @@ local SettingTab = Utility:Tab({
     IconThemed = "Oceanic",
 })
 
--- ✅ ADD SECTIONS
+-- UI Elements
 HomeTab:Section({
     Title = "Home Section",
     TextXAlignment = "Left",
@@ -44,7 +43,7 @@ HomeTab:Section({
 })
 
 HomeTab:Slider({
-    Title = "Bypass Charge Rod",
+    Title = "Charge Rod Delay",
     Step = 0.1,
     Value = {
         Min = 0,
@@ -65,7 +64,12 @@ HomeTab:Toggle({
     Callback = function(v)
         ActiveAutoFishing = v
         if v then
-            task.spawn(AutoFishing)
+            spawn(AutoFishing)
+        else
+            print("🛑 Auto fishing disabled")
+            -- Stop any ongoing animations
+            StopCurrentAnimation()
+            pcall(function() PlayAnimation(AnimIdle) end)
         end
     end
 })
