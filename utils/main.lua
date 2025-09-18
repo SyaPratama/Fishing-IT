@@ -3,8 +3,11 @@ function GetRandomCordinate()
 end
 
 function CastFishingRod()
+    -- ServerTime
+    local chargeTime = workspace.GetServerTimeNow()
     -- Equip Fishing Rod
     PickRod:FireServer(1)
+    ChargeRod:InvokeServer(chargeTime)
 
     -- Delay
     task.wait(0.1)
@@ -25,7 +28,6 @@ function CastFishingRod()
                 task.wait(ChargeRodSpeed)
 
                 -- Current timestamp
-                local chargeTime = tick() * 1000
                 pcall(function ()
                   ChargedRod:InvokeServer(chargeTime)
                 end)
@@ -40,7 +42,7 @@ function CastFishingRod()
             end
         )
     else
-        print("❌ Failed to start fishing:", result)
+        print("❌ Failed to start fishing:", failed)
         Window:Notify({
             Title = "❌ Error",
             Content = "Failed to start fishing minigame",
@@ -50,10 +52,10 @@ function CastFishingRod()
 end
 
 function AutoFishing()
-    pcall(function ()
+    spawn(function ()
         while ActiveAutoFishing do
             CastFishingRod()
-            task.wait(2)
+            task.wait(2.5)
         end
     end)
 end

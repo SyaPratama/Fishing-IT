@@ -1,30 +1,20 @@
--- ▶️ AUTO-REBLOCK IF REMOTE IS RECREATED
+-- ✅ Unlock metatable dulu
+local mt = getrawmetatable(game)
+setreadonly(mt, false)
 
-local function hookUpdateOxygen()
-    local mt = getrawmetatable(game)
-    local oldNameCall = mt.__namecall
+local oldNameCall = mt.__namecall
 
-    mt.__namecall = newcclosure(function(self, method, ...)
-        if method == "FireServer" and typeof(self) == "Instance" and self.Name == "URE/UpdateOxygen" then
-            local args = {...}
-            local newArgs = {}
-            for i = 1, #args do
-                table.insert(newArgs, nil)
-            end
-            print("[🔄 MODIFIED] URE/UpdateOxygen — args set to nil")
-            return oldNameCall(self, method, unpack(newArgs))
+mt.__namecall = newcclosure(function(self, ...)
+    local method = getnamecallmethod()
+    if method == "FireServer" and typeof(self) == "Instance" then
+        -- Cek path lengkap biar 100% yakin
+        if self:GetFullName():find("URE/UpdateOxygen") then
+            print("[🛡️ BLOCKED] Remote blocked:", self:GetFullName())
+            return nil -- stop, jangan kirim ke server
         end
-        return oldNameCall(self, method, ...)
-    end)
-    print("✅ URE/UpdateOxygen hooked!")
-end
-
--- Hook pertama kali
-hookUpdateOxygen()
-
--- Monitor jika ada remote baru dibuat
-game:GetService("ReplicatedStorage"):GetDescendants():GetPropertyChangedSignal("Name"):Connect(function(child)
-    if child.Name == "URE/UpdateOxygen" and (child:IsA("RemoteEvent") or child:IsA("RemoteFunction")) then
-        hookUpdateOxygen()
     end
+
+    return oldNameCall(self, ...)
 end)
+
+setreadonly(mt, true)

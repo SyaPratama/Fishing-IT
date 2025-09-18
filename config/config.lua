@@ -45,6 +45,12 @@ Window = WindUI:CreateWindow({
     },
 })
 
+Window:Notify({
+    Title = "✅ UI Loaded",
+    Content = "Ready to Auto Fish",
+    Type = "Success"
+})
+
 -- Utilities
 
 ReplicatedStorage = game:GetService("ReplicatedStorage")
