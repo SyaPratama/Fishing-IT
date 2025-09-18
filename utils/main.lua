@@ -38,11 +38,11 @@ function CastFishingRod()
                     FishingCompleted:FireServer()
                 end)
 
-                print("✅ Fishing completed!")
+                print("Fishing completed!")
             end
         )
     else
-        print("❌ Failed to start fishing:", failed)
+        print("Failed to start fishing:", failed)
         WindUI:Notify({
             Title = "Error",
             Content = "Failed to start fishing minigame",
