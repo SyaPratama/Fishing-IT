@@ -3,7 +3,6 @@ Version = "1.6.41"
 WindUI = loadstring(game:HttpGetAsync("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
 
 -- Window Theme
-
 WindUI:AddTheme({
     Name = "Oceanic",
     Accent = Color3.fromRGB(0, 180, 255), -- Bright ocean cyan
@@ -46,10 +45,9 @@ Window = WindUI:CreateWindow({
 })
 
 WindUI:Notify({
-    Title = "✅ UI Loaded",
+    Title = "UI Loaded",
     Content = "Ready to Auto Fish",
-    Duration = 2.5,
-    Icon = "check"
+    Duration = 2,
 })
 
 -- Utilities
