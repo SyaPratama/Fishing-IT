@@ -55,3 +55,6 @@ PickRod = Remote:WaitForChild("RE/EquipToolFromHotbar")
 ChargedRod = Remote:WaitForChild("RF/ChargeFishingRod")
 FishingIndicator = Remote:WaitForChild("RF/RequestFishingMinigameStarted")
 FishingCompleted = Remote:WaitForChild("RE/FishingCompleted")
+
+-- Variabel
+ActiveAutoFishing = false

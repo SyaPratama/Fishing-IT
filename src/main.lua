@@ -43,14 +43,30 @@ HomeTab:Section({
     TextSize = 16
 })
 
+HomeTab:Slider({
+    Title = "Bypass Charge Rod",
+    Step = 0.1,
+    Value = {
+        Min = 0.1,
+        Max = 10,
+        Default = 0.5
+    },
+    Callback = function(v)
+        ChargeRodSpeed = v
+    end
+})
+
 HomeTab:Toggle({
     Title = "Auto Fishing",
     Desc = "Activated Auto Fishing",
     Icon = "fish",
     Type = "Checkbox",
     Default = false,
-    Callback = function(state)
-        return state
+    Callback = function(v)
+        ActiveAutoFishing = v
+        if v then
+            AutoFishing()
+        end
     end
 })
 

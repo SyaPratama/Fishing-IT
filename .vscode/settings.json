@@ -1,5 +1,9 @@
 {
     "Lua.diagnostics.globals": [
-        "game"
+        "game",
+        "getRandomCoordinated",
+        "task",
+        "tick",
+        "spawn"
     ]
 }
