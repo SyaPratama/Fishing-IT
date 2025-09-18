@@ -1,7 +1,7 @@
-local Version = "1.6.41"
+Version = "1.6.41"
 
 -- ✅ FIXED URL (hapus spasi yang bikin error)
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
+WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
 
 -- 🐠 THEME — "Oceanic"
 WindUI:AddTheme({
@@ -18,7 +18,7 @@ WindUI:AddTheme({
 })
 
 -- ✅ CREATE WINDOW
-local Window = WindUI:CreateWindow({
+Window = WindUI:CreateWindow({
     Title = "Fishing Hub",
     Icon = "fish", -- 🐟 Valid Lucide icon
     Author = "By Tama",

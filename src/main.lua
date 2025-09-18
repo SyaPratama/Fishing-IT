@@ -1,4 +1,4 @@
-local _ = loadstring(game:HttpGet("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/refs/heads/main/config/config.lua"))
+loadstring(game:HttpGet("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/main/config/config.lua"))()
 
 
 local Main = Window:Section({
