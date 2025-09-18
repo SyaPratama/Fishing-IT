@@ -46,9 +46,9 @@ Window = WindUI:CreateWindow({
 })
 
 WindUI:Notify({
-    Title = "✅ UI Loaded",
+    Title = "UI Loaded",
     Content = "Ready to Auto Fish",
-    Duration = 2.5,
+    Duration = 2,
     Icon = "check"
 })
 
