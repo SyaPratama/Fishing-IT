@@ -5,15 +5,15 @@ WindUI = loadstring(game:HttpGetAsync("https://github.com/Footagesus/WindUI/rele
 -- Window Theme
 WindUI:AddTheme({
     Name = "Oceanic",
-    Accent = Color3.fromRGB(0, 180, 255),
-    Text = Color3.fromRGB(255, 255, 255),
-    Background = Color3.fromRGB(10, 26, 42),
-    Button = Color3.fromRGB(13, 42, 64),
-    Icon = Color3.fromRGB(128, 208, 255),
-    Outline = Color3.fromRGB(51, 170, 255),
-    Placeholder = Color3.fromRGB(102, 179, 255),
-    Dialog = Color3.fromRGB(15, 37, 58),
-    Input = Color3.fromRGB(12, 32, 53)
+    Accent = "#00b4ff",           -- Bright ocean cyan
+    Text = "#ffffff",             -- White text
+    Background = "#0a1a2a",       -- Deep ocean blue
+    Button = "#0d2a40",           -- Darker blue button
+    Icon = "#80d0ff",             -- Light cyan icons
+    Outline = "#33aaff",          -- Glowing outline
+    Placeholder = "#66b3ff",      -- Soft blue placeholder
+    Dialog = "#0f253a",           -- Slightly lighter dialog bg
+    Input = "#0c2035",            -- Input background
 })
 
 -- Initialize Windows
@@ -49,6 +49,23 @@ WindUI:Notify({
     Content = "Ready to Auto Fish",
     Duration = 2,
 })
+
+-- Utilities
+
+ReplicatedStorage = game:GetService("ReplicatedStorage")
+Players = game:GetService("Players")
+CurrentPlayer = Players.LocalPlayer
+Remote = ReplicatedStorage:WaitForChild("Packages"):WaitForChild("_Index"):WaitForChild("sleitnick_net@0.2.0"):WaitForChild("net")
+PickRod = Remote:WaitForChild("RE/EquipToolFromHotbar")
+ChargedRod = Remote:WaitForChild("RF/ChargeFishingRod")
+FishingIndicator = Remote:WaitForChild("RF/RequestFishingMinigameStarted")
+FishingCompleted = Remote:WaitForChild("RE/FishingCompleted")
+
+-- Variabel
+ActiveAutoFishing = false
+ChargeRodSpeed = 0.1
+MinCoordinateFishing = -10
+MaxCoordinateFishing = 10
 
 -- Utilities
 
