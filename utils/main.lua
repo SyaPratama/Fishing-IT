@@ -13,6 +13,8 @@ function CastFishingRod()
     local x = GetRandomCordinate()
     local y = GetRandomCordinate()
 
+    print(x,y)
+
     local success, failed = pcall(function ()
         return FishingIndicator:InvokeServer(x,y)
     end)
@@ -29,23 +31,28 @@ function CastFishingRod()
                 end)
 
                 -- Delay 
-
-                task.wait(0.5)
+                task.wait(0.3)
                 pcall(function ()
                     FishingCompleted:FireServer()
                 end)
+
+                print("✅ Fishing completed!")
             end
         )
     else
-        print("Failed To Start Fishing: ", failed)
+        print("❌ Failed to start fishing:", result)
+        Window:Notify({
+            Title = "❌ Error",
+            Content = "Failed to start fishing minigame",
+            Type = "Error"
+        })
     end
 end
 
 function AutoFishing()
-    spawn(function ()
+    pcall(function ()
         while ActiveAutoFishing do
             CastFishingRod()
-
             task.wait(2)
         end
     end)
