@@ -1,5 +1,3 @@
--- Config
-
 Version = "1.6.41"
 
 WindUI = loadstring(game:HttpGetAsync("https://github.com/Footagesus/WindUI/releases/download/" .. Version .. "/main.lua"))()
@@ -47,6 +45,13 @@ Window = WindUI:CreateWindow({
     },
 })
 
+WindUI:Notify({
+    Title = "✅ UI Loaded",
+    Content = "Ready to Auto Fish",
+    Duration = 2.5,
+    Icon = "check"
+})
+
 -- Utilities
 
 ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -64,15 +69,16 @@ ChargeRodSpeed = 0.1
 MinCoordinateFishing = -10
 MaxCoordinateFishing = 10
 
--- Utility
-
 function GetRandomCordinate()
     return math.random(MinCoordinateFishing * 1000, MaxCoordinateFishing * 1000) / 1000
 end
 
 function CastFishingRod()
+    -- ServerTime
+    local chargeTime = workspace.GetServerTimeNow()
     -- Equip Fishing Rod
     PickRod:FireServer(1)
+    ChargeRod:InvokeServer(chargeTime)
 
     -- Delay
     task.wait(0.1)
@@ -93,7 +99,6 @@ function CastFishingRod()
                 task.wait(ChargeRodSpeed)
 
                 -- Current timestamp
-                local chargeTime = tick() * 1000
                 pcall(function ()
                   ChargedRod:InvokeServer(chargeTime)
                 end)
@@ -108,25 +113,27 @@ function CastFishingRod()
             end
         )
     else
-        print("❌ Failed to start fishing:", result)
-        Window:Notify({
-            Title = "❌ Error",
+        print("❌ Failed to start fishing:", failed)
+        WindUI:Notify({
+            Title = "Error",
             Content = "Failed to start fishing minigame",
-            Type = "Error"
+            Duration = 2.5,
+            Icon = "circle-x"
         })
     end
 end
 
 function AutoFishing()
-    pcall(function ()
+    spawn(function ()
         while ActiveAutoFishing do
             CastFishingRod()
-            task.wait(2)
+            task.wait(2.5)
         end
     end)
 end
 
--- Src
+loadstring(game:HttpGet("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/main/config/config.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/main/utils/main.lua"))()
 
 local Main = Window:Section({
     Title = "Main",
