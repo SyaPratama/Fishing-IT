@@ -47,7 +47,6 @@ function CastFishingRod()
             Title = "Error",
             Content = "Failed to start fishing minigame",
             Duration = 2,
-            Icon = "circle-x"
         })
     end
 end
