@@ -43,10 +43,11 @@ function CastFishingRod()
         )
     else
         print("❌ Failed to start fishing:", failed)
-        Window:Notify({
-            Title = "❌ Error",
+        WindUI:Notify({
+            Title = "Error",
             Content = "Failed to start fishing minigame",
-            Type = "Error"
+            Duration = 2.5,
+            Icon = "circle-x"
         })
     end
 end

@@ -45,10 +45,11 @@ Window = WindUI:CreateWindow({
     },
 })
 
-Window:Notify({
+WindUI:Notify({
     Title = "✅ UI Loaded",
     Content = "Ready to Auto Fish",
-    Type = "Success"
+    Duration = 2.5,
+    Icon = "check"
 })
 
 -- Utilities
