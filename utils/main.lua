@@ -66,7 +66,7 @@ function CastFishingRod()
     print("🎣 Casting fishing rod...")
 
     EquipRod()
-    task.wait(0.3)
+    task.wait(0.1)
 
     local chargeTime = workspace:GetServerTimeNow()
     pcall(function()
