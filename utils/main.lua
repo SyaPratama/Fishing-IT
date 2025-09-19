@@ -61,13 +61,6 @@ function EquipRod()
     end)
 end
 
-function ChargeRodSafely()
-    local timestamp = workspace:GetServerTimeNow()
-    pcall(function()
-        ChargedRod:InvokeServer(timestamp)
-    end)
-end
-
 function CastFishingRod()
     if not ActiveAutoFishing then return end
     print("🎣 Casting fishing rod...")
@@ -122,7 +115,7 @@ function AutoFishing()
     while ActiveAutoFishing do
         pcall(CastFishingRod)
         if not ActiveAutoFishing then break end
-        task.wait(2)
+        task.wait(1)
     end
     print("🛑 Auto fishing stopped")
 
