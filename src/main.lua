@@ -63,7 +63,7 @@ HomeTab:Slider({
     end
 })
 
-HomeTab:Toggle({
+local AutoFishing = HomeTab:Toggle({
     Title = "Auto Fishing",
     Desc = "Activated Auto Fishing",
     Icon = "fish",
@@ -78,6 +78,8 @@ HomeTab:Toggle({
         end
     end
 })
+
+AutoFishing:Set(ActiveAutoFishing)
 
 HomeTab:Section({
     Title = "Sea",
