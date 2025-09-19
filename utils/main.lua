@@ -37,9 +37,7 @@ function ChargeRodSafely()
 end
 
 function CastFishingRod()
-    -- Check if still active before proceeding
     if not ActiveAutoFishing then return end
-
     print("🎣 Casting fishing rod...")
 
     -- Equip rod
@@ -87,7 +85,6 @@ function CastFishingRod()
             print("❌ Error completing fishing:", completeErr)
         end
     else
-        -- pcall(function() PlayAnimation(AnimFailure) end)
         print("❌ Failed to start fishing:", err)
     end
 end
