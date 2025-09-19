@@ -1,0 +1,43 @@
+{
+    "locations": [
+        {
+            "name": "Coral Reefs",
+            "coordinated": "-2803.99609375, -5.624969482421875, 2106.754638671875"
+        },
+        {
+            "name": "Cystal Island",
+            "coordinated": "865.0313720703125, 9.861413955688477, 4939.43359375"
+        },
+                {
+            "name": "Esoteric Depths",
+            "coordinated": "3054.970703125, -1308.354736328125, 1483.97412109375"
+        },
+        {
+            "name": "Esoteric Islands",
+            "coordinated": "2035.173095703125, 14.028488159179688, 1392.968505859375"
+        },
+        {
+            "name": "Fisherman Island",
+            "coordinated": "32.96784210205078, 6.721221923828125, 2827.258544921875"
+        },
+        {
+            "name": "Treasure Island",
+            "coordinated": "-3600, -319.82415771484375, -1396.25"
+        },
+        {
+            "name": "Tropical Grove Island",
+            "coordinated": "-2135.96826171875, 48.958740234375, 3750.142822265625"
+        },
+        {
+            "name": "Winter Fest Island",
+            "coordinated": "1638.52, 6.52, 3300.55"
+        },
+        {
+            "name":"Kohana Island",
+            "coordinated": "-639.2144165039062, 12.54327392578125, 607.37939453125"
+        },
+        {
+
+        }
+    ]
+}

@@ -128,5 +128,5 @@ end
 -- 🧪 Example Usage:
 local Players = game:GetService("Players")
 local CurrentPlayer = Players.LocalPlayer
-local Marker = CFrame.new(-2871.809326171875, 47.86968994140625, 1999.093017578125)
+local Marker = CFrame.new(1638.52, 6.52, 3300.55)
 teleportPlayerToIsland(CurrentPlayer, "Kohana",Marker)
