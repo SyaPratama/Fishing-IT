@@ -115,7 +115,7 @@ function AutoFishing()
     while ActiveAutoFishing do
         pcall(CastFishingRod)
         if not ActiveAutoFishing then break end
-        task.wait(1)
+        task.wait(0.5)
     end
     print("🛑 Auto fishing stopped")
 
