@@ -73,7 +73,7 @@ ChargeRodSpeed = 0.1
 MinCoordinateFishing = -10
 MaxCoordinateFishing = 10
 CoordRange = 0.02
-MiniGameDelay = 2.2 
+MiniGameDelay = 1.5
 BaseX = -0.75
 BaseY = 0.99
 
