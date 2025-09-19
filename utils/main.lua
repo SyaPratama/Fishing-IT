@@ -57,7 +57,7 @@ function CastFishingRod()
 
     -- Equip rod
     EquipRod()
-    task.wait(0.1)
+    task.wait(0.3)
 
     -- Play cast animation
     -- pcall(function() PlayAnimation(AnimCast) end)
@@ -84,7 +84,7 @@ function CastFishingRod()
         print("🎮 Fishing minigame started!")
 
         -- Play reel animation
-        -- pcall(function() PlayAnimation(AnimEasyReel) end)
+        pcall(function() PlayAnimation(AnimEasyReel) end)
 
         -- Check again before waiting
         if not ActiveAutoFishing then return end
@@ -101,7 +101,7 @@ function CastFishingRod()
         end)
 
         if completeSuccess then
-            -- pcall(function() PlayAnimation(AnimCatch) end)
+            pcall(function() PlayAnimation(AnimCatch) end)
             print("✅ Perfect catch! Fish caught!")
         else
             print("❌ Error completing fishing:", completeErr)
