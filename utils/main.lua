@@ -9,9 +9,6 @@ GameOptions.MasterVolume = 0
         end
     end
 
-    local SwimController = ReplicatedStorage:WaitForChild("Controllers"):WaitForChild("SwimController")
-    SwimController:Destroy()
-
     setreadonly(Meta, false)
 
     local oldNameCall = Meta.__namecall
