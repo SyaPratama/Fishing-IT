@@ -132,8 +132,10 @@ function TeleportPlayerToIsland(islandName)
     local character = CurrentPlayer.Character
     for _, location in ipairs(DataIslands.locations) do
         if islandName == location.name then
-            local marker = CFrame.new(location.coordinated)
-            print(location.coordinated)
+            local x, y, z = location.coordinated:match("([^,]+),%s*([^,]+),%s*(.+)")
+            x, y, z = tonumber(x), tonumber(y), tonumber(z)
+            local position = Vector3.new(x, y, z)
+            local marker = CFrame.new(position)
             local hrp = character and character:FindFirstChild("HumanoidRootPart")
             if hrp and marker then
                 hrp.CFrame = marker * CFrame.new(0, 5, 0)
