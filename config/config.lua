@@ -6,7 +6,6 @@ WindUI:AddTheme({
     Name = "Oceanic",
     Accent = "#00b4ff",
     Text = "#ffffff",
-    Background = "#0a1a2a",
     Button = "#0d2a40",
     Icon = "#80d0ff",
     Outline = "#33aaff",

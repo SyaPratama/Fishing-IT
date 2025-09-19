@@ -18,6 +18,8 @@ function SetupDrowningHook()
 
     Meta.__namecall = newcclosure(function(self, ...)
         local method = getnamecallmethod()
+
+        print(self, method)
         
         if ActiveDrowning and method == "FireServer" and self:IsA("RemoteEvent") then
             local fullName = self:GetFullName()
@@ -33,6 +35,8 @@ function SetupDrowningHook()
     setreadonly(Meta, true)
     print("[🎣] Drowning hook installed")
 end
+
+SetupDrowningHook()
 
 function RemoveDrowningHook()
     if OldNameCall then
