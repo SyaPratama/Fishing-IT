@@ -86,6 +86,7 @@ MiniGameDelay = 1.5
 BaseX = -0.75
 BaseY = 0.99
 ActiveDrowning = true
+OldNameCall = Meta.__namecall
 
 -- Character and Humanoid setup
 Character = CurrentPlayer.Character or CurrentPlayer.CharacterAdded:Wait()

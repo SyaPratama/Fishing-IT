@@ -8,29 +8,40 @@ GameOptions.MasterVolume = 0
             group.Volume = 0
         end
     end
+end)()
 
+
+
+function SetupDrowningHook()
     setreadonly(Meta, false)
 
-    local oldNameCall = Meta.__namecall
-
+    OldNameCall = Meta.__namecall
     Meta.__namecall = newcclosure(function(self, ...)
         local method = getnamecallmethod()
-
-        -- Hanya cek jika method adalah FireServer dan self adalah RemoteEvent
         if ActiveDrowning and method == "FireServer" and typeof(self) == "Instance" and self:IsA("RemoteEvent") then
             if self.Name == "UpdateOxygen" or self:GetFullName():find("URE/UpdateOxygen") then
                 print("[🛡️ BLOCKED] Remote blocked:", self:GetFullName())
-                return nil -- blokir pengiriman
+                return nil
             end
         end
 
-        return oldNameCall(self, ...)
+        return OldNameCall(self, ...)
     end)
 
     setreadonly(Meta, true)
-end)()
+    print("[🎣] Drowning hook installed")
+end
 
--- ✅ Destroy unapproved sound
+function RemoveDrowningHook()
+    if OldNameCall then
+        local Meta = getrawmetatable(game)
+        setreadonly(Meta, false)
+        Meta.__namecall = OldNameCall -- restore fungsi asli
+        setreadonly(Meta, true)
+        print("[🎣] Drowning hook removed")
+    end
+end
+
 workspace.DescendantAdded:Connect(function(obj)
     if obj:IsA("Sound") and obj.SoundId == "rbxassetid://303632290" then
         obj:Destroy()

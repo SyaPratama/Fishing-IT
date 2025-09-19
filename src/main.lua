@@ -96,8 +96,10 @@ local Drowning = HomeTab:Toggle({
     Callback = function(v)
         ActiveDrowning = v
         if v then
+            SetupDrowningHook()
             print("🛡️ Anti Drowning enabled")
         else
+            RemoveDrowningHook()
             print("⚠️ Anti Drowning disabled")
         end
     end
