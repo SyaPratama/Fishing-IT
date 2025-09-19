@@ -101,6 +101,8 @@ local Drowning = HomeTab:Toggle({
     end
 })
 
+Drowning:Set(ActiveDrowning)
+
 TeleportTab:Section({
     Title = "Teleport Section",
     TextXAlignment = "Left",
@@ -134,7 +136,3 @@ SettingTab:Section({
     TextXAlignment = "Left",
     TextSize = 20
 })
-
-(function ()
-    Drowning:Set(ActiveDrowning)
-end)()
