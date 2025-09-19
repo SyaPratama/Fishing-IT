@@ -1,36 +1,12 @@
-print(DataIslands)
+
+-- Disable Sound
+SoundService.Volume = 0
 
 -- Update character on respawn
 CurrentPlayer.CharacterAdded:Connect(function(char)
     Character = char
     Humanoid = char:WaitForChild("Humanoid", 5)
 end)
-
--- Store animation tracks to stop them later
-local currentAnimationTrack = nil
-
-function StopCurrentAnimation()
-    if currentAnimationTrack and currentAnimationTrack.IsPlaying then
-        pcall(function()
-            currentAnimationTrack:Stop()
-        end)
-    end
-end
-
-function PlayAnimation(anim)
-    if not anim or not Humanoid then return end
-
-    -- Stop any current animation
-    StopCurrentAnimation()
-
-    local success, track = pcall(function()
-        local t = Humanoid:LoadAnimation(anim)
-        t:Play()
-        currentAnimationTrack = t
-        return t
-    end)
-    return success and track or nil
-end
 
 function GetRandomCoordinate()
     return math.random(-CoordRange * 10000, CoordRange * 10000) / 10000
@@ -59,9 +35,6 @@ function CastFishingRod()
     EquipRod()
     task.wait(0.1)
 
-    -- Play cast animation
-    -- pcall(function() PlayAnimation(AnimCast) end)
-
     -- Charge the rod with proper timestamp
     local chargeTime = workspace:GetServerTimeNow()
     pcall(function()
@@ -83,9 +56,6 @@ function CastFishingRod()
     if success then
         print("🎮 Fishing minigame started!")
 
-        -- Play reel animation
-        -- pcall(function() PlayAnimation(AnimEasyReel) end)
-
         -- Check again before waiting
         if not ActiveAutoFishing then return end
 
@@ -101,7 +71,6 @@ function CastFishingRod()
         end)
 
         if completeSuccess then
-            pcall(function() PlayAnimation(AnimCatch) end)
             print("✅ Perfect catch! Fish caught!")
         else
             print("❌ Error completing fishing:", completeErr)
@@ -123,8 +92,6 @@ function AutoFishing()
     print("🛑 Auto fishing stopped")
 
     -- Return to normal state
-    -- StopCurrentAnimation()
-    -- pcall(function() PlayAnimation(AnimIdle) end)
     print("🎮 Player returned to normal state")
 end
 
