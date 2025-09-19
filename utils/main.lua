@@ -13,6 +13,12 @@ GameOptions.MasterVolume = 0
     end
 end)()
 
+SoundService.SoundAdded:Connect(function(sound)
+    if sound.SoundId == "rbxassetid://303632290" then
+        sound:Destroy()
+    end
+end)
+
 -- Update character on respawn
 CurrentPlayer.CharacterAdded:Connect(function(char)
     Character = char
