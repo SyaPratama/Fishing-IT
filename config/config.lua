@@ -58,6 +58,8 @@ UIS.InputBegan:Connect(function(input, gameProcessed)
     end
 end)
 
+-- Utilities
+HttpService = game:GetService("HttpService")
 ReplicatedStorage = game:GetService("ReplicatedStorage")
 Players = game:GetService("Players")
 CurrentPlayer = Players.LocalPlayer
@@ -66,6 +68,10 @@ PickRod = Remote:WaitForChild("RE/EquipToolFromHotbar")
 ChargedRod = Remote:WaitForChild("RF/ChargeFishingRod")
 FishingIndicator = Remote:WaitForChild("RF/RequestFishingMinigameStarted")
 FishingCompleted = Remote:WaitForChild("RE/FishingCompleted")
+
+-- Data
+IslandJSON = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/refs/heads/main/data/islands.json"))()
+DataIslands = HttpService:JSONDecode(IslandJSON)
 
 -- Variables
 ActiveAutoFishing = false

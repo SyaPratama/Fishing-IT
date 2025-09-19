@@ -1,3 +1,5 @@
+print(DataIslands)
+
 -- Update character on respawn
 CurrentPlayer.CharacterAdded:Connect(function(char)
     Character = char
