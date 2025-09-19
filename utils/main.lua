@@ -15,10 +15,12 @@ GameOptions.MasterVolume = 0
 
     Meta.__namecall = newcclosure(function(self, ...)
         local method = getnamecallmethod()
-        if ActiveDrowning and method == "FireServer" and typeof(self) == "Instance" then
-            if self:GetFullName():find("URE/UpdateOxygen") then
+
+        -- Hanya cek jika method adalah FireServer dan self adalah RemoteEvent
+        if ActiveDrowning and method == "FireServer" and typeof(self) == "Instance" and self:IsA("RemoteEvent") then
+            if self.Name == "UpdateOxygen" or self:GetFullName():find("URE/UpdateOxygen") then
                 print("[🛡️ BLOCKED] Remote blocked:", self:GetFullName())
-                return nil
+                return nil -- blokir pengiriman
             end
         end
 
