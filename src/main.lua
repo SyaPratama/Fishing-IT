@@ -50,16 +50,13 @@ HomeTab:Section({
     TextSize = 16
 })
 
-HomeTab:Slider({
+HomeTab:Input({
     Title = "Bypass Charge Speed",
-    Step = 0.1,
-    Value = {
-        Min = 0,
-        Max = 2,
-        Default = 1.5,
-    },
+    Desc = "Set the speed for bypassing the charge fishing rod minigame",
+    Value = tostring(MiniGameDelay),
+    Type = "Input",
     Callback = function(v)
-        MiniGameDelay = v
+        MiniGameDelay = tonumber(v)
     end
 })
 
