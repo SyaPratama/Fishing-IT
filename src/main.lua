@@ -85,7 +85,7 @@ HomeTab:Section({
     TextSize = 16
 })
 
-HomeTab:Toggle({
+local Drowning = HomeTab:Toggle({
     Title = "Anti Drowning",
     Desc = "Prevents your character from drowning",
     Icon = "fish",
@@ -134,3 +134,7 @@ SettingTab:Section({
     TextXAlignment = "Left",
     TextSize = 20
 })
+
+(function ()
+    Drowning:Set(ActiveDrowning)
+end)()
