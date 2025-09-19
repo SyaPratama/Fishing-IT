@@ -8,6 +8,8 @@ GameOptions.MasterVolume = 0
             group.Volume = 0
         end
     end
+
+    ReplicatedStorage.Controllers.SwimController:Destroy()
 end)()
 
 -- ✅ Destroy unapproved sound
