@@ -51,7 +51,7 @@ HomeTab:Section({
 })
 
 HomeTab:Slider({
-    Title = "Charge Rod Delay",
+    Title = "Bypass Charge Speed",
     Step = 0.1,
     Value = {
         Min = 0,
@@ -59,7 +59,7 @@ HomeTab:Slider({
         Default = 0.1,
     },
     Callback = function(v)
-        ChargeRodSpeed = v
+        MiniGameDelay = v
     end
 })
 
