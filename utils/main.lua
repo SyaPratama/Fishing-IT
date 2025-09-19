@@ -72,6 +72,7 @@ function CastFishingRod()
     pcall(function()
         ChargedRod:InvokeServer(chargeTime)
     end)
+    
     task.wait(ChargeRodSpeed)
     local x = BaseX + GetRandomCoordinate()
     local y = BaseY + GetRandomCoordinate()

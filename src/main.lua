@@ -56,7 +56,7 @@ HomeTab:Slider({
     Value = {
         Min = 0,
         Max = 2,
-        Default = 0.1,
+        Default = 1.5,
     },
     Callback = function(v)
         MiniGameDelay = v
