@@ -12,6 +12,7 @@ WindUI:AddTheme({
     Outline = "#33aaff",
     Placeholder = "#66b3ff",
     Dialog = "#0f253a",
+    Input = "#0d2a40",
 })
 
 Window = WindUI:CreateWindow({
