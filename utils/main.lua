@@ -4,20 +4,9 @@ GameOptions.MasterVolume = 0
 
 (function()
     for _, g in ipairs(SoundService:GetChildren()) do
-        if g:GetAttribute("OriginalVolume") then
-            g.Volume = 0
-            g.OriginalVolume = 0
-        else
-            g.Volume = 0
-        end
+        g:Destroy()
     end
 end)()
-
-SoundService.SoundAdded:Connect(function(sound)
-    if sound.SoundId == "rbxassetid://303632290" then
-        sound:Destroy()
-    end
-end)
 
 -- Update character on respawn
 CurrentPlayer.CharacterAdded:Connect(function(char)
