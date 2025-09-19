@@ -6,12 +6,12 @@ WindUI:AddTheme({
     Name = "Oceanic",
     Accent = "#00b4ff",
     Text = "#ffffff",
+    Background = "#0a1a2a",
     Button = "#0d2a40",
     Icon = "#80d0ff",
     Outline = "#33aaff",
     Placeholder = "#66b3ff",
     Dialog = "#0f253a",
-    Input = "#0c2035",
 })
 
 Window = WindUI:CreateWindow({
@@ -28,6 +28,7 @@ Window = WindUI:CreateWindow({
     Theme = "Oceanic",
     Resizable = true,
     SideBarWidth = 175,
+    BackgroundImageTransparency = 0.42,
     HideSearchBar = true,
     ScrollBarEnabled = true,
 
