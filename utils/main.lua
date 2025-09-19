@@ -10,6 +10,24 @@ GameOptions.MasterVolume = 0
     end
 
     ReplicatedStorage.Controllers.SwimController:Destroy()
+
+    setreadonly(Meta, false)
+
+    local oldNameCall = Meta.__namecall
+
+    Meta.__namecall = newcclosure(function(self, ...)
+        local method = getnamecallmethod()
+        if ActiveDrowning and method == "FireServer" and typeof(self) == "Instance" then
+            if self:GetFullName():find("URE/UpdateOxygen") then
+                print("[🛡️ BLOCKED] Remote blocked:", self:GetFullName())
+                return nil
+            end
+        end
+
+        return oldNameCall(self, ...)
+    end)
+
+    setreadonly(Meta, true)
 end)()
 
 -- ✅ Destroy unapproved sound

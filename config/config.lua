@@ -70,6 +70,7 @@ FishingIndicator = Remote:WaitForChild("RF/RequestFishingMinigameStarted")
 FishingCompleted = Remote:WaitForChild("RE/FishingCompleted")
 SoundService = game:GetService("SoundService")
 UserSettings():GetService("UserGameSettings")
+Meta = getrawmetatable(game)
 
 -- Data
 IslandJSON = game:HttpGetAsync("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/refs/heads/main/data/islands.json")
@@ -85,6 +86,7 @@ CoordRange = 0.02
 MiniGameDelay = 1.5
 BaseX = -0.75
 BaseY = 0.99
+ActiveDrowning = true
 
 -- Character and Humanoid setup
 Character = CurrentPlayer.Character or CurrentPlayer.CharacterAdded:Wait()

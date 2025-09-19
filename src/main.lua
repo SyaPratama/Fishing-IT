@@ -79,6 +79,28 @@ HomeTab:Toggle({
     end
 })
 
+HomeTab:Section({
+    Title = "Sea",
+    TextXAlignment = "Left",
+    TextSize = 16
+})
+
+HomeTab:Toggle({
+    Title = "Anti Drowning",
+    Desc = "Prevents your character from drowning",
+    Icon = "water",
+    Type = "Checkbox",
+    Default = true,
+    Callback = function(v)
+        ActiveDrowning = v
+        if v then
+            print("🛡️ Anti Drowning enabled")
+        else
+            print("⚠️ Anti Drowning disabled")
+        end
+    end
+})
+
 TeleportTab:Section({
     Title = "Teleport Section",
     TextXAlignment = "Left",
