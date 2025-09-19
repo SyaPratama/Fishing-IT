@@ -57,10 +57,10 @@ function CastFishingRod()
 
     -- Equip rod
     EquipRod()
-    task.wait(0.3)
+    task.wait(0.1)
 
     -- Play cast animation
-    pcall(function() PlayAnimation(AnimCast) end)
+    -- pcall(function() PlayAnimation(AnimCast) end)
 
     -- Charge the rod with proper timestamp
     local chargeTime = workspace:GetServerTimeNow()
@@ -84,7 +84,7 @@ function CastFishingRod()
         print("🎮 Fishing minigame started!")
 
         -- Play reel animation
-        pcall(function() PlayAnimation(AnimEasyReel) end)
+        -- pcall(function() PlayAnimation(AnimEasyReel) end)
 
         -- Check again before waiting
         if not ActiveAutoFishing then return end
@@ -101,13 +101,13 @@ function CastFishingRod()
         end)
 
         if completeSuccess then
-            pcall(function() PlayAnimation(AnimCatch) end)
+            -- pcall(function() PlayAnimation(AnimCatch) end)
             print("✅ Perfect catch! Fish caught!")
         else
             print("❌ Error completing fishing:", completeErr)
         end
     else
-        pcall(function() PlayAnimation(AnimFailure) end)
+        -- pcall(function() PlayAnimation(AnimFailure) end)
         print("❌ Failed to start fishing:", err)
     end
 end
@@ -118,13 +118,13 @@ function AutoFishing()
         pcall(CastFishingRod)
         -- Check if still active before waiting
         if not ActiveAutoFishing then break end
-        task.wait(3)
+        task.wait(1)
     end
     print("🛑 Auto fishing stopped")
 
     -- Return to normal state
-    StopCurrentAnimation()
-    pcall(function() PlayAnimation(AnimIdle) end)
+    -- StopCurrentAnimation()
+    -- pcall(function() PlayAnimation(AnimIdle) end)
     print("🎮 Player returned to normal state")
 end
 
