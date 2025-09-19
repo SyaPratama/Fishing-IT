@@ -19,6 +19,12 @@ local HomeTab = Main:Tab({
     IconThemed = "Oceanic",
 })
 
+local TeleportTab = Main:Tab({
+    Title = "Teleport",
+    Icon = "map",
+    IconThemed = "Oceanic"
+})
+
 local ToolTab = Main:Tab({
     Title = "Tools",
     Icon = "wrench",
@@ -73,6 +79,27 @@ HomeTab:Toggle({
             StopCurrentAnimation()
             pcall(function() PlayAnimation(AnimIdle) end)
         end
+    end
+})
+
+TeleportTab:Section({
+    Title = "Teleport Section",
+    TextXAlignment = "Left",
+    TextSize = 20
+})
+
+TeleportTab:Section({
+    Title = "Teleport",
+    TextXAlignment = "Left",
+    TextSize = 16
+})
+
+TeleportTab:Dropdown({
+    Title = "Teleport",
+    Values = DataIslandsName,
+    Value = DataIslandsName[0],
+    Callback = function(option) 
+        print("Category selected: " .. option) 
     end
 })
 

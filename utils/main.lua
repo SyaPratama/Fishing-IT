@@ -19,10 +19,10 @@ end
 
 function PlayAnimation(anim)
     if not anim or not Humanoid then return end
-    
+
     -- Stop any current animation
     StopCurrentAnimation()
-    
+
     local success, track = pcall(function()
         local t = Humanoid:LoadAnimation(anim)
         t:Play()
@@ -52,13 +52,13 @@ end
 function CastFishingRod()
     -- Check if still active before proceeding
     if not ActiveAutoFishing then return end
-    
+
     print("🎣 Casting fishing rod...")
-    
+
     -- Equip rod
     EquipRod()
     task.wait(0.3)
-    
+
     -- Play cast animation
     pcall(function() PlayAnimation(AnimCast) end)
 
@@ -82,7 +82,7 @@ function CastFishingRod()
 
     if success then
         print("🎮 Fishing minigame started!")
-        
+
         -- Play reel animation
         pcall(function() PlayAnimation(AnimEasyReel) end)
 
@@ -121,9 +121,17 @@ function AutoFishing()
         task.wait(3)
     end
     print("🛑 Auto fishing stopped")
-    
+
     -- Return to normal state
     StopCurrentAnimation()
     pcall(function() PlayAnimation(AnimIdle) end)
     print("🎮 Player returned to normal state")
 end
+
+(function()
+    for _, island in ipairs(DataIslands.locations) do
+        if island.name and island.coordinated then
+            table.insert(DataIslandsName, island.name)
+        end
+    end
+end)()
