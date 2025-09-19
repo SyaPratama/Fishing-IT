@@ -3,19 +3,16 @@ local GameOptions = UserSettings().GameSettings
 GameOptions.MasterVolume = 0
 
 (function()
-    for _, g in ipairs(SoundService:GetChildren()) do
-        if g:GetAttribute("OriginalVolume") then
-            g.Volume = 0
-            g.OriginalVolume = 0
-        else
-            g.Volume = 0
+    for _, group in ipairs(SoundService:GetChildren()) do
+        if group:IsA("SoundGroup") then
+            group.Volume = 0
         end
-        g:Destroy()
     end
 end)()
 
+-- ✅ Destroy unapproved sound
 workspace.DescendantAdded:Connect(function(obj)
-    if obj.SoundId == "rbxassetid://303632290" then
+    if obj:IsA("Sound") and obj.SoundId == "rbxassetid://303632290" then
         obj:Destroy()
     end
 end)
@@ -48,7 +45,7 @@ function CastFishingRod()
     print("🎣 Casting fishing rod...")
 
     EquipRod()
-    task.wait(0.1)
+    task.wait(0.3)
 
     local chargeTime = workspace:GetServerTimeNow()
     pcall(function()
@@ -97,7 +94,7 @@ function AutoFishing()
     while ActiveAutoFishing do
         pcall(CastFishingRod)
         if not ActiveAutoFishing then break end
-        task.wait(1)
+        task.wait(2)
     end
     print("🛑 Auto fishing stopped")
 

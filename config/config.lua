@@ -29,7 +29,7 @@ Window = WindUI:CreateWindow({
     Theme = "Oceanic",
     Resizable = true,
     SideBarWidth = 175,
-    BackgroundImageTransparency = 0.42,
+    BackgroundTransparency = 0.42,
     HideSearchBar = true,
     ScrollBarEnabled = true,
 
