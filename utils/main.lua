@@ -1,5 +1,6 @@
 -- Disable Sound
-UserSetting.GameSettings.MasterVolume = 0
+local GameOptions = UserSettings().GameSettings
+GameOptions.MasterVolume = 0
 
 (function()
     for _, g in ipairs(SoundService:GetChildren()) do

@@ -68,8 +68,8 @@ PickRod = Remote:WaitForChild("RE/EquipToolFromHotbar")
 ChargedRod = Remote:WaitForChild("RF/ChargeFishingRod")
 FishingIndicator = Remote:WaitForChild("RF/RequestFishingMinigameStarted")
 FishingCompleted = Remote:WaitForChild("RE/FishingCompleted")
-UserSetting = game:GetService("UserSettings")
 SoundService = game:GetService("SoundService")
+UserSettings():GetService("UserGameSettings")
 
 -- Data
 IslandJSON = game:HttpGetAsync("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/refs/heads/main/data/islands.json")
