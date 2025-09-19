@@ -75,9 +75,6 @@ HomeTab:Toggle({
             spawn(AutoFishing)
         else
             print("🛑 Auto fishing disabled")
-            -- Stop any ongoing animations
-            StopCurrentAnimation()
-            pcall(function() PlayAnimation(AnimIdle) end)
         end
     end
 })
