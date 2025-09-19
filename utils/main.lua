@@ -1,6 +1,16 @@
-
 -- Disable Sound
-SoundService.Volume = 0
+UserSetting.GameSettings.MasterVolume = 0
+
+(function()
+    for _, g in ipairs(SoundService:GetChildren()) do
+        if g:GetAttribute("OriginalVolume") then
+            g.Volume = 0
+            g.OriginalVolume = 0
+        else
+            g.Volume = 0
+        end
+    end
+end)()
 
 -- Update character on respawn
 CurrentPlayer.CharacterAdded:Connect(function(char)

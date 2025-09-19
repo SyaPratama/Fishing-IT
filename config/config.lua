@@ -68,6 +68,7 @@ PickRod = Remote:WaitForChild("RE/EquipToolFromHotbar")
 ChargedRod = Remote:WaitForChild("RF/ChargeFishingRod")
 FishingIndicator = Remote:WaitForChild("RF/RequestFishingMinigameStarted")
 FishingCompleted = Remote:WaitForChild("RE/FishingCompleted")
+UserSetting = game:GetService("UserSettings")
 SoundService = game:GetService("SoundService")
 
 -- Data
