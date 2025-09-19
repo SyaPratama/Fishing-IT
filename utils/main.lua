@@ -10,17 +10,19 @@ GameOptions.MasterVolume = 0
     end
 end)()
 
-
-
 function SetupDrowningHook()
+    local Meta = getrawmetatable(game)
     setreadonly(Meta, false)
 
     OldNameCall = Meta.__namecall
+
     Meta.__namecall = newcclosure(function(self, ...)
         local method = getnamecallmethod()
-        if ActiveDrowning and method == "FireServer" and typeof(self) == "Instance" and self:IsA("RemoteEvent") then
-            if self.Name == "UpdateOxygen" or self:GetFullName():find("URE/UpdateOxygen") then
-                print("[🛡️ BLOCKED] Remote blocked:", self:GetFullName())
+        
+        if ActiveDrowning and method == "FireServer" and self:IsA("RemoteEvent") then
+            local fullName = self:GetFullName()
+            if fullName:find("URE/UpdateOxygen") or self.Name == "UpdateOxygen" then
+                print("[🛡️ BLOCKED] Remote blocked:", fullName)
                 return nil
             end
         end
