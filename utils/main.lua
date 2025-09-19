@@ -130,7 +130,7 @@ end
 
 function TeleportPlayerToIsland(islandName)
     local character = CurrentPlayer.Character
-    for _, location in pairs(DataIslands.locations) do
+    for _, location in ipairs(DataIslands.locations) do
         if islandName == location.name then
             local marker = CFrame.new(location.coordinated)
             print(location.coordinated)
