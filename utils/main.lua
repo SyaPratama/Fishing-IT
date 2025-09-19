@@ -19,24 +19,15 @@ function SetupDrowningHook()
     Meta.__namecall = newcclosure(function(self, ...)
         local method = getnamecallmethod()
 
-        print(self, method)
-        
-        if ActiveDrowning and method == "FireServer" and self:IsA("RemoteEvent") then
-            local fullName = self:GetFullName()
-            if fullName:find("URE/UpdateOxygen") or self.Name == "UpdateOxygen" then
-                print("[🛡️ BLOCKED] Remote blocked:", fullName)
-                return nil
-            end
+        if ActiveDrowning and method == "FireServer" and self.name == "URE/UpdateOxygen" then
+            print("Jalan")
+            return nil
         end
-
-        return OldNameCall(self, ...)
+        return OldNameCall(self,...)
     end)
 
     setreadonly(Meta, true)
-    print("[🎣] Drowning hook installed")
 end
-
-SetupDrowningHook()
 
 function RemoveDrowningHook()
     if OldNameCall then
