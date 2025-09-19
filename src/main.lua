@@ -99,8 +99,8 @@ TeleportTab:Dropdown({
     Values = DataIslandsName,
     Value = DataIslandsName[5],
     SearchBarEnabled = true,
-    Callback = function(option) 
-        print("Category selected: " .. option) 
+    Callback = function(option)
+        return TeleportPlayerToIsland(option)
     end
 })
 

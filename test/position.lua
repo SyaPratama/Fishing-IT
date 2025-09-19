@@ -108,25 +108,16 @@ end
 
 -- === Example: Teleport Player to Specific Island ===
 
-local function teleportPlayerToIsland(player, islandName, coordinates)
-    local character = player.Character
-    local hrp = character and character:FindFirstChild("HumanoidRootPart")
-    if hrp and coordinates then
-        hrp.CFrame = coordinates * CFrame.new(0, 5, 0)  -- Offset up to avoid clipping
-        print(player.Name .. " teleported to " .. islandName)
-        return true
+function TeleportPlayerToIsland(islandName)
+    local character = CurrentPlayer.Character
+    for _, location in pairs(DataIslands.locations) do
+        if islandName == location.name then
+            local marker = CFrame.new(location.coordinated)
+            local hrp = character and character:FindFirstChild("HumanoidRootPart")
+            if hrp and marker then
+                hrp.CFrame = marker * CFrame.new(0, 5, 0)
+                return
+            end
+        end
     end
-    warn("Island not found or no valid marker: " .. islandName)
-    return false
 end
-
-
--- for k, v in pairs(islandName) do
---     print(k,v)
--- end
-
--- 🧪 Example Usage:
-local Players = game:GetService("Players")
-local CurrentPlayer = Players.LocalPlayer
-local Marker = CFrame.new(1638.52, 6.52, 3300.55)
-teleportPlayerToIsland(CurrentPlayer, "Kohana",Marker)

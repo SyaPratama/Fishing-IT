@@ -128,6 +128,20 @@ function AutoFishing()
     print("🎮 Player returned to normal state")
 end
 
+function TeleportPlayerToIsland(islandName)
+    local character = CurrentPlayer.Character
+    for _, location in pairs(DataIslands.locations) do
+        if islandName == location.name then
+            local marker = CFrame.new(location.coordinated)
+            local hrp = character and character:FindFirstChild("HumanoidRootPart")
+            if hrp and marker then
+                hrp.CFrame = marker * CFrame.new(0, 5, 0)
+                return
+            end
+        end
+    end
+end
+
 (function()
     for _, island in ipairs(DataIslands.locations) do
         if island.name and island.coordinated then
