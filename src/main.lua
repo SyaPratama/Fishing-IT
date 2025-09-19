@@ -52,7 +52,7 @@ HomeTab:Section({
 
 HomeTab:Input({
     Title = "Bypass Charge Speed",
-    Desc = "Set the speed for bypassing the charge fishing rod minigame",
+    Desc = "bypassing charge fishing",
     Value = tostring(MiniGameDelay),
     Type = "Input",
     Callback = function(v)

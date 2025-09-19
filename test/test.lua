@@ -83,7 +83,7 @@ ChargeRodSpeed = 0.1
 MinCoordinateFishing = -10
 MaxCoordinateFishing = 10
 CoordRange = 0.02
-MiniGameDelay = 1.4
+MiniGameDelay = 1.45
 BaseX = -0.75
 BaseY = 0.99
 ActiveDrowning = true
@@ -92,6 +92,8 @@ OldNameCall = Meta.__namecall
 -- Character and Humanoid setup
 Character = CurrentPlayer.Character or CurrentPlayer.CharacterAdded:Wait()
 Humanoid = Character:WaitForChild("Humanoid",10)
+
+-- Utilities
 
 -- Disable Sound
 local GameOptions = UserSettings().GameSettings
@@ -167,6 +169,7 @@ function CastFishingRod()
     pcall(function()
         ChargedRod:InvokeServer(chargeTime)
     end)
+    
     task.wait(ChargeRodSpeed)
     local x = BaseX + GetRandomCoordinate()
     local y = BaseY + GetRandomCoordinate()
@@ -251,6 +254,9 @@ end
     end
 end)()
 
+-- UI Sectionsloadstring(game:HttpGetAsync("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/main/config/config.lua"))()
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/main/utils/main.lua"))()
+
 -- UI Sections
 local Main = Window:Section({
     Title = "Main",
@@ -300,16 +306,13 @@ HomeTab:Section({
     TextSize = 16
 })
 
-HomeTab:Slider({
+HomeTab:Input({
     Title = "Bypass Charge Speed",
-    Step = 0.1,
-    Value = {
-        Min = 0,
-        Max = 2,
-        Default = 0.1,
-    },
+    Desc = "bypassing charge fishing",
+    Value = tostring(MiniGameDelay),
+    Type = "Input",
     Callback = function(v)
-        MiniGameDelay = v
+        MiniGameDelay = tonumber(v)
     end
 })
 
