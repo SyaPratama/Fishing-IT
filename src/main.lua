@@ -88,7 +88,7 @@ HomeTab:Section({
 HomeTab:Toggle({
     Title = "Anti Drowning",
     Desc = "Prevents your character from drowning",
-    Icon = "water",
+    Icon = "fish",
     Type = "Checkbox",
     Default = true,
     Callback = function(v)

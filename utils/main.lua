@@ -9,7 +9,8 @@ GameOptions.MasterVolume = 0
         end
     end
 
-    ReplicatedStorage.Controllers.SwimController:Destroy()
+    local SwimController = ReplicatedStorage:WaitForChild("Controllers"):WaitForChild("SwimController")
+    SwimController:Destroy()
 
     setreadonly(Meta, false)
 
