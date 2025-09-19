@@ -97,7 +97,7 @@ TeleportTab:Section({
 TeleportTab:Dropdown({
     Title = "Teleport",
     Values = DataIslandsName,
-    Value = DataIslandsName[0],
+    Value = DataIslandsName[1],
     Callback = function(option) 
         print("Category selected: " .. option) 
     end
