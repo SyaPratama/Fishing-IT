@@ -113,6 +113,7 @@ function TeleportPlayerToIsland(islandName)
     for _, location in pairs(DataIslands.locations) do
         if islandName == location.name then
             local marker = CFrame.new(location.coordinated)
+            print(location.coordinated)
             local hrp = character and character:FindFirstChild("HumanoidRootPart")
             if hrp and marker then
                 hrp.CFrame = marker * CFrame.new(0, 5, 0)
