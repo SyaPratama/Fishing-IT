@@ -86,15 +86,6 @@ MiniGameDelay = 1.5
 BaseX = -0.75
 BaseY = 0.99
 
--- Animation Loading
-AnimationsFolder = ReplicatedStorage.Modules.Animations
-AnimCast = AnimationsFolder:FindFirstChild("CastFromFullChargePosition1Hand")
-AnimChargeFinish = AnimationsFolder:FindFirstChild("FinishChargingRod1Hand")
-AnimEasyReel = AnimationsFolder:FindFirstChild("EasyFishReel")
-AnimCatch = AnimationsFolder:FindFirstChild("CaughtFish1")
-AnimIdle = AnimationsFolder:FindFirstChild("FishingRodCharacterIdle2")
-AnimFailure = AnimationsFolder:FindFirstChild("FishingFailure")
-
 -- Character and Humanoid setup
 Character = CurrentPlayer.Character or CurrentPlayer.CharacterAdded:Wait()
-Humanoid = Character:FindFirstChild("Humanoid")
+Humanoid = Character:WaitForChild("Humanoid",10)

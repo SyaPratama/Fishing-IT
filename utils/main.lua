@@ -40,21 +40,14 @@ function CastFishingRod()
     if not ActiveAutoFishing then return end
     print("🎣 Casting fishing rod...")
 
-    -- Equip rod
     EquipRod()
     task.wait(0.1)
 
-    -- Charge the rod with proper timestamp
     local chargeTime = workspace:GetServerTimeNow()
     pcall(function()
         ChargedRod:InvokeServer(chargeTime)
     end)
     task.wait(ChargeRodSpeed)
-
-    -- Check again if still active
-    if not ActiveAutoFishing then return end
-
-    -- Use known good coordinates for perfect catch
     local x = BaseX + GetRandomCoordinate()
     local y = BaseY + GetRandomCoordinate()
 
@@ -65,22 +58,25 @@ function CastFishingRod()
     if success then
         print("🎮 Fishing minigame started!")
 
-        -- Check again before waiting
-        if not ActiveAutoFishing then return end
-
-        -- Wait for perfect timing
         task.wait(MiniGameDelay)
 
-        -- Check again before completing
-        if not ActiveAutoFishing then return end
-
-        -- Complete fishing with verification
         local completeSuccess, completeErr = pcall(function()
             FishingCompleted:FireServer()
         end)
 
         if completeSuccess then
             print("✅ Perfect catch! Fish caught!")
+
+            -- ✅ RESET SEMUA STATE
+            if Humanoid then
+                -- Hentikan semua animasi yang mungkin dimainkan server
+                for _, track in ipairs(Humanoid:GetPlayingAnimationTracks()) do
+                    track:Stop()
+                end
+                -- Reset kecepatan
+                Humanoid.WalkSpeed = 16
+                Humanoid.JumpPower = 50
+            end
         else
             print("❌ Error completing fishing:", completeErr)
         end
@@ -93,13 +89,20 @@ function AutoFishing()
     print("🤖 Auto fishing started")
     while ActiveAutoFishing do
         pcall(CastFishingRod)
-        -- Check if still active before waiting
         if not ActiveAutoFishing then break end
         task.wait(1)
     end
     print("🛑 Auto fishing stopped")
 
-    -- Return to normal state
+    -- ✅ FINAL RESET
+    if Humanoid then
+        for _, track in ipairs(Humanoid:GetPlayingAnimationTracks()) do
+            track:Stop()
+        end
+        Humanoid.WalkSpeed = 16
+        Humanoid.JumpPower = 50
+    end
+
     print("🎮 Player returned to normal state")
 end
 
