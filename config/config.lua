@@ -64,7 +64,7 @@ ReplicatedStorage = game:GetService("ReplicatedStorage")
 Players = game:GetService("Players")
 CurrentPlayer = Players.LocalPlayer
 Remote = ReplicatedStorage:WaitForChild("Packages"):WaitForChild("_Index"):WaitForChild("sleitnick_net@0.2.0")
-:WaitForChild("net")
+    :WaitForChild("net")
 PickRod = Remote:WaitForChild("RE/EquipToolFromHotbar")
 ChargedRod = Remote:WaitForChild("RF/ChargeFishingRod")
 FishingIndicator = Remote:WaitForChild("RF/RequestFishingMinigameStarted")
@@ -76,7 +76,7 @@ Meta = getrawmetatable(game)
 
 -- Data
 IslandJSON = game:HttpGetAsync(
-"https://raw.githubusercontent.com/SyaPratama/Fishing-IT/refs/heads/main/data/islands.json")
+    "https://raw.githubusercontent.com/SyaPratama/Fishing-IT/refs/heads/main/data/islands.json")
 DataIslands = HttpService:JSONDecode(IslandJSON)
 DataIslandsName = {}
 
@@ -86,8 +86,8 @@ ChargeRodSpeed = 0.1
 MinCoordinateFishing = -10
 MaxCoordinateFishing = 10
 CoordRange = 0.02
-MiniGameDelay = 2.6
-ByPassMiniGame = 1.4
+MiniGameDelay = 2.5
+ByPassMiniGame = 2.3
 BaseX = -0.75
 BaseY = 0.99
 ActiveDrowning = true

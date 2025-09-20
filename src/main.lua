@@ -71,7 +71,6 @@ local AutoFishing = HomeTab:Toggle({
         if v then
             spawn(AutoFishing)
         else
-            spawn(StopAutoFishing)
             print("🛑 Auto fishing disabled")
         end
     end

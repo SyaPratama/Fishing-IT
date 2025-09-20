@@ -1,3 +1,4 @@
+
 -- Disable Sound
 local GameOptions = UserSettings().GameSettings
 GameOptions.MasterVolume = 0
@@ -20,18 +21,24 @@ ReplicateTextEffect.OnClientEvent:Connect(function(data)
                 task.spawn(function()
                     for i = 1, 3 do
                         print("🎣 Reeling in the fish... (" .. i .. "/3)")
+                        task.wait(ByPassMiniGame)
                         FishingCompleted:FireServer()
-                        if i < 3 then
-                            task.wait(ByPassMiniGame)
-                        end
                     end
 
-                    task.wait(0.1)
+                    -- Lakukan reset state seperti biasa
+                    if Humanoid then
+                        for _, track in ipairs(Humanoid:GetPlayingAnimationTracks()) do
+                            track:Stop()
+                        end
+                        Humanoid.WalkSpeed = 16
+                        Humanoid.JumpPower = 50
+                    end
                 end)
             end
         end
     end
 end)
+
 
 function SetupDrowningHook()
     local Meta = getrawmetatable(game)
@@ -104,33 +111,21 @@ function CastFishingRod()
     FishingIndicator:InvokeServer(x, y)
 
     IsWaitingForExclaim = true
+    task.wait(MiniGameDelay)
 end
 
 function AutoFishing()
     print("🤖 Auto fishing started")
     ActiveAutoFishing = true
     IsWaitingForExclaim = false
-
-
-    FishingTask = task.spawn(
-        function()
-            while ActiveAutoFishing do
-                if not IsWaitingForExclaim then
-                    pcall(CastFishingRod)
-                end
-                task.wait(0.1)
-            end
+    while ActiveAutoFishing do
+        if not IsWaitingForExclaim then
+            pcall(CastFishingRod)
         end
-    )
-end
-
-function StopAutoFishing()
-    ActiveAutoFishing = false
-    IsWaitingForExclaim = false
-    if FishingTask then
-        task.cancel(FishingTask)
+        task.wait(0.1)
     end
-    -- Reset player state
+    print("🛑 Auto fishing stopped")
+
     if Humanoid then
         for _, track in ipairs(Humanoid:GetPlayingAnimationTracks()) do
             track:Stop()
@@ -138,6 +133,7 @@ function StopAutoFishing()
         Humanoid.WalkSpeed = 16
         Humanoid.JumpPower = 50
     end
+
     print("🎮 Player returned to normal state")
 end
 

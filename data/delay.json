@@ -2,59 +2,73 @@
   "rods": [
     {
       "name": "Ares Rod",
-      "delay": 1.12
+      "MiniGameDelay": 1.12,
+      "BypassDelay": 1.45
     },
     {
       "name": "Angler Rod",
-      "delay": 1.12
+      "MiniGameDelay": 1.12,
+      "BypassDelay": 1.45
     },
     {
       "name": "Ghostfinn Rod",
-      "delay": 1.12
+      "MiniGameDelay": 1.12,
+      "BypassDelay": 1.45
     },
     {
       "name": "Astral Rod",
-      "delay": 1.9
+      "MiniGameDelay": 1.9,
+      "BypassDelay": 1.45
     },
     {
       "name": "Chrome Rod",
-      "delay": 2.3
+      "MiniGameDelay": 2.3,
+      "BypassDelay": 2.0
     },
     {
       "name": "Steampunk Rod",
-      "delay": 2.5
+      "MiniGameDelay": 2.5,
+      "BypassDelay": 2.3
     },
     {
       "name": "Lucky Rod",
-      "delay": 3.5
+      "MiniGameDelay": 3.5,
+      "BypassDelay": 3.6
     },
     {
       "name": "Midnight Rod",
-      "delay": 3.3
+      "MiniGameDelay": 3.3,
+      "BypassDelay": 3.4
     },
     {
       "name": "Demascus Rod",
-      "delay": 3.9
+      "MiniGameDelay": 3.9,
+      "BypassDelay": 3.8
     },
     {
       "name": "Grass Rod",
-      "delay": 3.8
+      "MiniGameDelay": 3.8,
+      "BypassDelay": 3.9
     },
     {
       "name": "Luck Rod",
-      "delay": 4.2
+      "MiniGameDelay": 4.2,
+      "BypassDelay": 4.1
     },
     {
       "name": "Carbon Rod",
-      "delay": 4.0
+      "MiniGameDelay": 4.0,
+      "BypassDelay": 3.8
     },
     {
       "name": "Lava Rod",
-      "delay": 4.2
+      "MiniGameDelay": 4.2,
+      "BypassDelay": 4.1
     },
     {
       "name": "Starter Rod",
-      "delay": 4.3
+      "MiniGameDelay": 4.3,
+      "BypassDelay": 4.2
     }
   ]
 }
