@@ -1,0 +1,60 @@
+{
+  "rods": [
+    {
+      "name": "Ares Rod",
+      "delay": 1.12
+    },
+    {
+      "name": "Angler Rod",
+      "delay": 1.12
+    },
+    {
+      "name": "Ghostfinn Rod",
+      "delay": 1.12
+    },
+    {
+      "name": "Astral Rod",
+      "delay": 1.9
+    },
+    {
+      "name": "Chrome Rod",
+      "delay": 2.3
+    },
+    {
+      "name": "Steampunk Rod",
+      "delay": 2.5
+    },
+    {
+      "name": "Lucky Rod",
+      "delay": 3.5
+    },
+    {
+      "name": "Midnight Rod",
+      "delay": 3.3
+    },
+    {
+      "name": "Demascus Rod",
+      "delay": 3.9
+    },
+    {
+      "name": "Grass Rod",
+      "delay": 3.8
+    },
+    {
+      "name": "Luck Rod",
+      "delay": 4.2
+    },
+    {
+      "name": "Carbon Rod",
+      "delay": 4.0
+    },
+    {
+      "name": "Lava Rod",
+      "delay": 4.2
+    },
+    {
+      "name": "Starter Rod",
+      "delay": 4.3
+    }
+  ]
+}
