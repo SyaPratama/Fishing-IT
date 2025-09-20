@@ -19,7 +19,7 @@ ReplicateTextEffect.OnClientEvent:Connect(function(data)
                 IsWaitingForExclaim = false
                 task.spawn(function()
                     for _ = 1, 5 do
-                        task.wait(1)
+                        task.wait(ByPassMiniGame)
                         FishingCompleted:FireServer()
                     end
 
