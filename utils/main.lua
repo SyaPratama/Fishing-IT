@@ -12,6 +12,7 @@ end)()
 
 
 ReplicateTextEffect.OnClientEvent:Connect(function(data)
+    print("ReplicateTextEffect fired with data:", data)
     if ActiveAutoFishing and IsWaitingForExclaim then
         if data and data.TextData and data.TextData.EffectType == "Exclaim" then
             local MyHead = Character and Character:FindFirstChild("Head")
@@ -105,18 +106,9 @@ function CastFishingRod()
     local x = BaseX + GetRandomCoordinate()
     local y = BaseY + GetRandomCoordinate()
 
-    local success, err = pcall(function()
-        FishingIndicator:InvokeServer(x, y)
-    end)
+    FishingIndicator:InvokeServer(x, y)
 
-    print(success)
-
-    if success then
-        print("🎮 Fishing minigame started!")
-        IsWaitingForExclaim = true
-    else
-        print("❌ Failed to start fishing:", err)
-    end
+    IsWaitingForExclaim = true
 end
 
 function AutoFishing()
