@@ -115,8 +115,10 @@ function AutoFishing()
     print("🤖 Auto fishing started")
     IsWaitingForExclaim = false
     while ActiveAutoFishing do
-        pcall(CastFishingRod)
-        if not ActiveAutoFishing then break end
+        if not IsWaitingForExclaim then
+            pcall(CastFishingRod)
+        end
+        task.wait(0.1)
     end
     print("🛑 Auto fishing stopped")
 
