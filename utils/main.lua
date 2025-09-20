@@ -19,8 +19,10 @@ ReplicateTextEffect.OnClientEvent:Connect(function(data)
                 IsWaitingForExclaim = false
                 task.spawn(function()
                     for i = 1, 3 do
-                        task.wait(ByPassMiniGame)
                         FishingCompleted:FireServer()
+                        if i < 3 then
+                            task.wait(ByPassMiniGame)
+                        end
                     end
 
                     print("✅ Perfect catch! Fish caught!")
