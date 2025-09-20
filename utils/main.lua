@@ -18,7 +18,7 @@ ReplicateTextEffect.OnClientEvent:Connect(function(data)
             if MyHead and data.Container == MyHead then
                 IsWaitingForExclaim = false
                 task.spawn(function()
-                    for _ = 1, 3 do
+                    for i = 1, 3 do
                         task.wait(ByPassMiniGame)
                         FishingCompleted:FireServer()
                     end
@@ -113,6 +113,7 @@ end
 
 function AutoFishing()
     print("🤖 Auto fishing started")
+    ActiveAutoFishing = true
     IsWaitingForExclaim = false
     while ActiveAutoFishing do
         if not IsWaitingForExclaim then
