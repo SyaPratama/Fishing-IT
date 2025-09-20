@@ -109,6 +109,8 @@ function CastFishingRod()
         FishingIndicator:InvokeServer(x, y)
     end)
 
+    print(success)
+
     if success then
         print("🎮 Fishing minigame started!")
         IsWaitingForExclaim = true
@@ -126,7 +128,6 @@ function AutoFishing()
     end
     print("🛑 Auto fishing stopped")
 
-    -- ✅ FINAL RESET
     if Humanoid then
         for _, track in ipairs(Humanoid:GetPlayingAnimationTracks()) do
             track:Stop()
