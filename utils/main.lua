@@ -26,15 +26,7 @@ ReplicateTextEffect.OnClientEvent:Connect(function(data)
                         end
                     end
 
-                    print("✅ Perfect catch! Fish caught!")
-                    -- Lakukan reset state seperti biasa
-                    if Humanoid then
-                        for _, track in ipairs(Humanoid:GetPlayingAnimationTracks()) do
-                            track:Stop()
-                        end
-                        Humanoid.WalkSpeed = 16
-                        Humanoid.JumpPower = 50
-                    end
+                    task.wait(0.1)
                 end)
             end
         end
@@ -118,14 +110,27 @@ function AutoFishing()
     print("🤖 Auto fishing started")
     ActiveAutoFishing = true
     IsWaitingForExclaim = false
-    while ActiveAutoFishing do
-        if not IsWaitingForExclaim then
-            pcall(CastFishingRod)
-        end
-        task.wait(0.1)
-    end
-    print("🛑 Auto fishing stopped")
 
+
+    FishingTask = task.spawn(
+        function()
+            while ActiveAutoFishing do
+                if not IsWaitingForExclaim then
+                    pcall(CastFishingRod)
+                end
+                task.wait(0.1)
+            end
+        end
+    )
+end
+
+function StopAutoFishing()
+    ActiveAutoFishing = false
+    IsWaitingForExclaim = false
+    if FishingTask then
+        task.cancel(FishingTask)
+    end
+    -- Reset player state
     if Humanoid then
         for _, track in ipairs(Humanoid:GetPlayingAnimationTracks()) do
             track:Stop()
@@ -133,7 +138,6 @@ function AutoFishing()
         Humanoid.WalkSpeed = 16
         Humanoid.JumpPower = 50
     end
-
     print("🎮 Player returned to normal state")
 end
 

@@ -107,18 +107,21 @@ for _, markerData in ipairs(islandMarkers) do
 end
 
 -- === Example: Teleport Player to Specific Island ===
+Players = game:GetService("Players")
+CurrentPlayer = Players.LocalPlayer
 
-function TeleportPlayerToIsland(islandName)
+function TeleportPlayerToIsland()
     local character = CurrentPlayer.Character
-    for _, location in pairs(DataIslands.locations) do
-        if islandName == location.name then
-            local marker = CFrame.new(location.coordinated)
-            print(location.coordinated)
+    -- for _, location in pairs(DataIslands.locations) do
+        -- if islandName == location.name then
+            local marker = CFrame.new(-3618.156982421875, 240.83665466308594, -1317.4580078125)
             local hrp = character and character:FindFirstChild("HumanoidRootPart")
             if hrp and marker then
                 hrp.CFrame = marker * CFrame.new(0, 5, 0)
                 return
             end
-        end
-    end
+        -- end
+    -- end
 end
+
+TeleportPlayerToIsland()

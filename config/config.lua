@@ -86,13 +86,14 @@ ChargeRodSpeed = 0.1
 MinCoordinateFishing = -10
 MaxCoordinateFishing = 10
 CoordRange = 0.02
-MiniGameDelay = 2.5
-ByPassMiniGame = 2.6
+MiniGameDelay = 2.2
+ByPassMiniGame = 1.4
 BaseX = -0.75
 BaseY = 0.99
 ActiveDrowning = true
 OldNameCall = Meta.__namecall
 IsWaitingForExclaim = false
+FishingTask = nil
 
 -- Character and Humanoid setup
 Character = CurrentPlayer.Character or CurrentPlayer.CharacterAdded:Wait()
