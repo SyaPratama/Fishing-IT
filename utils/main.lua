@@ -12,7 +12,7 @@ end)()
 
 
 ReplicateTextEffect.OnClientEvent:Connect(function(data)
-    print("ReplicateTextEffect fired with data:", data.TextData)
+    print("ReplicateTextEffect fired with data:", data[1])
     if ActiveAutoFishing and IsWaitingForExclaim then
         if data and data.TextData and data.TextData.EffectType == "Exclaim" then
             local MyHead = Character and Character:FindFirstChild("Head")
