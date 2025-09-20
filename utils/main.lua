@@ -15,13 +15,12 @@ ReplicateTextEffect.OnClientEvent:Connect(function(data)
     if ActiveAutoFishing and IsWaitingForExclaim then
         if data and data.TextData and data.TextData.EffectType == "Exclaim" then
             local MyHead = Character and Character:FindFirstChild("Head")
-            print(MyHead, data.Container)
             if MyHead and data.Container == MyHead then
                 IsWaitingForExclaim = false
                 task.spawn(function()
                     for _ = 1, 5 do
-                        task.wait(ByPassMiniGame)
                         FishingCompleted:FireServer()
+                        task.wait(ByPassMiniGame)
                     end
 
                     print("✅ Perfect catch! Fish caught!")
