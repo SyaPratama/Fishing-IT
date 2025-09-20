@@ -18,9 +18,9 @@ ReplicateTextEffect.OnClientEvent:Connect(function(data)
             if MyHead and data.Container == MyHead then
                 IsWaitingForExclaim = false
                 task.spawn(function()
-                    for _ = 1, 5 do
-                        FishingCompleted:FireServer()
+                    for _ = 1, 3 do
                         task.wait(ByPassMiniGame)
+                        FishingCompleted:FireServer()
                     end
 
                     print("✅ Perfect catch! Fish caught!")
