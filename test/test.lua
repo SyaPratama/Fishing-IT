@@ -83,7 +83,7 @@ ChargeRodSpeed = 0.1
 MinCoordinateFishing = -10
 MaxCoordinateFishing = 10
 CoordRange = 0.02
-MiniGameDelay = 1.45
+MiniGameDelay = 1.5
 BaseX = -0.75
 BaseY = 0.99
 ActiveDrowning = true
@@ -163,13 +163,13 @@ function CastFishingRod()
     print("🎣 Casting fishing rod...")
 
     EquipRod()
-    task.wait(0.1)
+    task.wait(0.125)
 
     local chargeTime = workspace:GetServerTimeNow()
     pcall(function()
         ChargedRod:InvokeServer(chargeTime)
     end)
-    
+
     task.wait(ChargeRodSpeed)
     local x = BaseX + GetRandomCoordinate()
     local y = BaseY + GetRandomCoordinate()
@@ -253,9 +253,6 @@ end
         end
     end
 end)()
-
--- UI Sectionsloadstring(game:HttpGetAsync("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/main/config/config.lua"))()
-loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/main/utils/main.lua"))()
 
 -- UI Sections
 local Main = Window:Section({
