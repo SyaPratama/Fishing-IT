@@ -19,8 +19,10 @@ ReplicateTextEffect.OnClientEvent:Connect(function(data)
                 IsWaitingForExclaim = false
                 task.spawn(function()
                     for _ = 1, 3 do
-                        task.wait(ByPassMiniGame)
                         FishingCompleted:FireServer()
+                        if i < 3 then
+                            task.wait(ByPassMiniGame)
+                        end
                     end
 
                     print("✅ Perfect catch! Fish caught!")
@@ -91,6 +93,7 @@ end
 
 function CastFishingRod()
     if not ActiveAutoFishing then return end
+    if IsWaitingForExclaim then return end
     print("🎣 Casting fishing rod...")
 
     EquipRod()
@@ -112,10 +115,10 @@ end
 
 function AutoFishing()
     print("🤖 Auto fishing started")
+    IsWaitingForExclaim = false
     while ActiveAutoFishing do
         pcall(CastFishingRod)
         if not ActiveAutoFishing then break end
-        task.wait(0.5)
     end
     print("🛑 Auto fishing stopped")
 
