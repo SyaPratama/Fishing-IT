@@ -10,6 +10,34 @@ GameOptions.MasterVolume = 0
     end
 end)()
 
+
+ReplicateTextEffect.OnClientEvent:Connect(function(data)
+    if ActiveAutoFishing and IsWaitingForExclaim then
+        if data and data.TextData and data.TextData.EffectType == "Exclaim" then
+            local MyHead = Character and Character:FindFirstChild("Head")
+            if MyHead and data.Container == MyHead then
+                IsWaitingForExclaim = false
+                task.spawn(function()
+                    for _ = 1, 5 do
+                        task.wait(1)
+                        FishingCompleted:FireServer()
+                    end
+
+                    print("✅ Perfect catch! Fish caught!")
+                    -- Lakukan reset state seperti biasa
+                    if Humanoid then
+                        for _, track in ipairs(Humanoid:GetPlayingAnimationTracks()) do
+                            track:Stop()
+                        end
+                        Humanoid.WalkSpeed = 16
+                        Humanoid.JumpPower = 50
+                    end
+                end)
+            end
+        end
+    end
+end)
+
 function SetupDrowningHook()
     local Meta = getrawmetatable(game)
     setreadonly(Meta, false)
@@ -23,7 +51,7 @@ function SetupDrowningHook()
             print("Jalan")
             return nil
         end
-        return OldNameCall(self,...)
+        return OldNameCall(self, ...)
     end)
 
     setreadonly(Meta, true)
@@ -83,29 +111,7 @@ function CastFishingRod()
 
     if success then
         print("🎮 Fishing minigame started!")
-
-        task.wait(MiniGameDelay)
-
-        local completeSuccess, completeErr = pcall(function()
-            FishingCompleted:FireServer()
-        end)
-
-        if completeSuccess then
-            print("✅ Perfect catch! Fish caught!")
-
-            -- ✅ RESET SEMUA STATE
-            if Humanoid then
-                -- Hentikan semua animasi yang mungkin dimainkan server
-                for _, track in ipairs(Humanoid:GetPlayingAnimationTracks()) do
-                    track:Stop()
-                end
-                -- Reset kecepatan
-                Humanoid.WalkSpeed = 16
-                Humanoid.JumpPower = 50
-            end
-        else
-            print("❌ Error completing fishing:", completeErr)
-        end
+        IsWaitingForExclaim = true
     else
         print("❌ Failed to start fishing:", err)
     end

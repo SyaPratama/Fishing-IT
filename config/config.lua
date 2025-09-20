@@ -69,6 +69,7 @@ PickRod = Remote:WaitForChild("RE/EquipToolFromHotbar")
 ChargedRod = Remote:WaitForChild("RF/ChargeFishingRod")
 FishingIndicator = Remote:WaitForChild("RF/RequestFishingMinigameStarted")
 FishingCompleted = Remote:WaitForChild("RE/FishingCompleted")
+ReplicateTextEffect = Remote:WaitForChild("RE/ReplicateTextEffect")
 SoundService = game:GetService("SoundService")
 UserSettings():GetService("UserGameSettings")
 Meta = getrawmetatable(game)
@@ -86,10 +87,12 @@ MinCoordinateFishing = -10
 MaxCoordinateFishing = 10
 CoordRange = 0.02
 MiniGameDelay = 2
+ByPassMiniGame = 1.8
 BaseX = -0.75
 BaseY = 0.99
 ActiveDrowning = true
 OldNameCall = Meta.__namecall
+IsWaitingForExclaim = false
 
 -- Character and Humanoid setup
 Character = CurrentPlayer.Character or CurrentPlayer.CharacterAdded:Wait()
