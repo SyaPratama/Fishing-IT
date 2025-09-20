@@ -1,5 +1,5 @@
-loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/main/config/config.lua"))()
-loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/main/utils/main.lua"))()
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/refs/heads/main/config/config.lua"))()
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/refs/heads/main/utils/main.lua"))()
 
 -- UI Sections
 local Main = Window:Section({
