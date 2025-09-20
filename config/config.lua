@@ -63,7 +63,8 @@ HttpService = game:GetService("HttpService")
 ReplicatedStorage = game:GetService("ReplicatedStorage")
 Players = game:GetService("Players")
 CurrentPlayer = Players.LocalPlayer
-Remote = ReplicatedStorage:WaitForChild("Packages"):WaitForChild("_Index"):WaitForChild("sleitnick_net@0.2.0"):WaitForChild("net")
+Remote = ReplicatedStorage:WaitForChild("Packages"):WaitForChild("_Index"):WaitForChild("sleitnick_net@0.2.0")
+:WaitForChild("net")
 PickRod = Remote:WaitForChild("RE/EquipToolFromHotbar")
 ChargedRod = Remote:WaitForChild("RF/ChargeFishingRod")
 FishingIndicator = Remote:WaitForChild("RF/RequestFishingMinigameStarted")
@@ -73,7 +74,8 @@ UserSettings():GetService("UserGameSettings")
 Meta = getrawmetatable(game)
 
 -- Data
-IslandJSON = game:HttpGetAsync("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/refs/heads/main/data/islands.json")
+IslandJSON = game:HttpGetAsync(
+"https://raw.githubusercontent.com/SyaPratama/Fishing-IT/refs/heads/main/data/islands.json")
 DataIslands = HttpService:JSONDecode(IslandJSON)
 DataIslandsName = {}
 
@@ -83,7 +85,7 @@ ChargeRodSpeed = 0.1
 MinCoordinateFishing = -10
 MaxCoordinateFishing = 10
 CoordRange = 0.02
-MiniGameDelay = 1.5
+MiniGameDelay = 2
 BaseX = -0.75
 BaseY = 0.99
 ActiveDrowning = true
@@ -91,4 +93,4 @@ OldNameCall = Meta.__namecall
 
 -- Character and Humanoid setup
 Character = CurrentPlayer.Character or CurrentPlayer.CharacterAdded:Wait()
-Humanoid = Character:WaitForChild("Humanoid",10)
+Humanoid = Character:WaitForChild("Humanoid", 10)
