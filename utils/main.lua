@@ -106,7 +106,7 @@ function CastFishingRod()
     local y = BaseY + GetRandomCoordinate()
 
     local success, err = pcall(function()
-        return FishingIndicator:InvokeServer(x, y)
+        FishingIndicator:InvokeServer(x, y)
     end)
 
     if success then
