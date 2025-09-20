@@ -66,13 +66,13 @@ function CastFishingRod()
     print("🎣 Casting fishing rod...")
 
     EquipRod()
-    task.wait(0.1)
+    task.wait(0.15)
 
     local chargeTime = workspace:GetServerTimeNow()
     pcall(function()
         ChargedRod:InvokeServer(chargeTime)
     end)
-    
+
     task.wait(ChargeRodSpeed)
     local x = BaseX + GetRandomCoordinate()
     local y = BaseY + GetRandomCoordinate()
@@ -116,7 +116,7 @@ function AutoFishing()
     while ActiveAutoFishing do
         pcall(CastFishingRod)
         if not ActiveAutoFishing then break end
-        task.wait(0.1)
+        task.wait(0.15)
     end
     print("🛑 Auto fishing stopped")
 
