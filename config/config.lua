@@ -80,6 +80,10 @@ IslandJSON = game:HttpGetAsync(
 DataIslands = HttpService:JSONDecode(IslandJSON)
 DataIslandsName = {}
 
+DelayJSON = game:HttpGetAsync(
+    "https://raw.githubusercontent.com/SyaPratama/Fishing-IT/refs/heads/main/data/delay.json")
+DataDelay = HttpService:JSONDecode(DelayJSON)
+
 -- Variables
 ActiveAutoFishing = false
 ChargeRodSpeed = 0.1
@@ -95,6 +99,20 @@ OldNameCall = Meta.__namecall
 IsWaitingForExclaim = false
 FishingTask = nil
 
+
 -- Character and Humanoid setup
 Character = CurrentPlayer.Character or CurrentPlayer.CharacterAdded:Wait()
 Humanoid = Character:WaitForChild("Humanoid", 10)
+
+
+-- Anim
+RodIdle = ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Animations"):WaitForChild("FishingRodReelIdle")
+RodReel = ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Animations"):WaitForChild("EasyFishReelStart")
+RodShake = ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Animations"):WaitForChild(
+    "CastFromFullChargePosition1Hand")
+Animator = Humanoid:FindFirstChildOfClass("Animator") or Instance.new("Animator", Humanoid)
+
+-- Animation Tracks
+RodAnimIdle = Animator:LoadAnimation(RodIdle)
+RodAnimShake = Animator:LoadAnimation(RodShake)
+RodAnimReel = Animator:LoadAnimation(RodReel)
