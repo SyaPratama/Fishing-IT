@@ -12,66 +12,58 @@ end)()
 
 
 ReplicateTextEffect.OnClientEvent:Connect(function(data)
-    if ActiveAutoFishing and IsWaitingForExclaim then
-        local textData = data[1]
-        local container = data[2]
+    if not ActiveAutoFishing or not IsWaitingForExclaim then
+        return -- Exit early if not actively waiting
+    end
 
-        if textData and textData.EffectType == "Exclaim" then
-            local MyHead = Character and Character:FindFirstChild("Head")
-            if MyHead and container == MyHead then
-                print("✅ Fish bite detected on player's head!")
-                IsWaitingForExclaim = false
+    local textData = data.TextData   -- Or data[1] ?
+    local container = data.Container -- Or data[2] ?
+
+    if textData and textData.EffectType == "Exclaim" then
+        local MyHead = Character and Character:FindFirstChild("Head")
+        if MyHead and container == MyHead then
+            print("✅ Fish bite detected on player's head!")
+            IsWaitingForExclaim = false
+
+            pcall(function()
+                if RodAnimIdle then RodAnimIdle:Stop() end
+                if RodAnimShake then
+                    RodAnimShake:Play()
+                    print("🎬 Playing Rod Shake Animation")
+                end
+            end)
+
+            task.spawn(function() -- Handle the catch in a separate thread
+                task.wait(0.2)    -- Briefly show shake
 
                 pcall(function()
-                    if RodAnimIdle then RodAnimIdle:Stop() end
-                    if RodAnimShake then
-                        RodAnimShake:Play()
-                        print("🎬 Playing Rod Shake Animation")
+                    if RodAnimShake then RodAnimShake:Stop() end
+                    if RodAnimReel then
+                        RodAnimReel:Play()
+                        print("🎬 Playing Rod Reel Animation")
                     end
                 end)
 
-                task.spawn(function()
-                    task.wait(0.2)
-
-                    pcall(function()
-                        if RodAnimShake then RodAnimShake:Stop() end
-                        if RodAnimReel then
-                            RodAnimReel:Play()
-                            print("🎬 Playing Rod Reel Animation")
-                        end
-                    end)
-
-                    for i = 1, 3 do
-                        print("🎣 Reeling in the fish... (" .. i .. "/3)")
-                        FishingCompleted:FireServer()
-                        if i < 3 then
-                            task.wait(ByPassMiniGame)
-                        end
+                for i = 1, 3 do
+                    print("🎣 Reeling in the fish... (" .. i .. "/3)")
+                    FishingCompleted:FireServer()
+                    if i < 3 then
+                        task.wait(ByPassMiniGame)
                     end
+                end
 
-                    -- === ANIMATION: Stop reeling, back to idle ===
-                    pcall(function()
-                        if RodAnimReel then
-                            RodAnimReel:Stop()
-                            print("🎬 Stopping Rod Reel Animation")
-                        end
-                        if RodAnimIdle and ActiveAutoFishing then
-                            RodAnimIdle:Play()
-                        end
-                    end)
-
-                    print("✅ Perfect catch! Fish caught!")
-
-                    -- Reset player state like before
-                    if Humanoid then
-                        for _, track in ipairs(Humanoid:GetPlayingAnimationTracks()) do
-                            track:Stop()
-                        end
-                        Humanoid.WalkSpeed = 16
-                        Humanoid.JumpPower = 50
+                pcall(function()
+                    if RodAnimReel then
+                        RodAnimReel:Stop()
+                        print("🎬 Stopping Rod Reel Animation")
+                    end
+                    if RodAnimIdle and ActiveAutoFishing then
+                        RodAnimIdle:Play()
                     end
                 end)
-            end
+
+                print("✅ Perfect catch! Fish caught!")
+            end)
         end
     end
 end)
@@ -112,7 +104,6 @@ workspace.DescendantAdded:Connect(function(obj)
     end
 end)
 
--- Update character on respawn
 CurrentPlayer.CharacterAdded:Connect(function(char)
     Character = char
     Humanoid = char:WaitForChild("Humanoid", 5)
@@ -129,25 +120,25 @@ function EquipRod()
 end
 
 function CastFishingRod()
-    if not ActiveAutoFishing then return end
-    if IsWaitingForExclaim then return end
+    if not ActiveAutoFishing or IsWaitingForExclaim then
+        return -- Guard clause
+    end
+
     print("🎣 Casting fishing rod...")
 
     EquipRod()
-    task.wait(0.1)
+    task.wait(0.1) -- Small delay after equipping
 
     local chargeTime = workspace:GetServerTimeNow()
     pcall(function()
         ChargedRod:InvokeServer(chargeTime)
     end)
 
-    task.wait(ChargeRodSpeed)
+    task.wait(ChargeRodSpeed) -- Wait for the rod to charge (this is usually short)
 
     pcall(function()
-        -- Stop any previous animations
         if RodAnimShake then RodAnimShake:Stop() end
         if RodAnimReel then RodAnimReel:Stop() end
-        -- Play idle
         if RodAnimIdle then
             RodAnimIdle:Play()
             print("🎬 Playing Rod Idle Animation")
@@ -157,19 +148,23 @@ function CastFishingRod()
     local x = BaseX + GetRandomCoordinate()
     local y = BaseY + GetRandomCoordinate()
 
-    FishingIndicator:InvokeServer(x, y)
+    local success, err = pcall(function()
+        FishingIndicator:InvokeServer(x, y)
+    end)
 
-    IsWaitingForExclaim = true
-    print("⏳ Waiting for fish bite...")
-    task.wait(MiniGameDelay) -- Wait for the mini-game duration
+    if success then
+        IsWaitingForExclaim = true
+        print("⏳ Waiting for fish bite... (Relying on ReplicateTextEffect event)")
+    else
+        print("❌ Failed to invoke FishingIndicator:", err)
+    end
 end
 
 function AutoFishing()
     print("🤖 Auto fishing started")
     ActiveAutoFishing = true
-    IsWaitingForExclaim = false
+    IsWaitingForExclaim = false -- Ensure we start fresh
 
-    -- Ensure any lingering animations are stopped
     pcall(function()
         if RodAnimShake then RodAnimShake:Stop() end
         if RodAnimReel then RodAnimReel:Stop() end
@@ -180,17 +175,18 @@ function AutoFishing()
         if not IsWaitingForExclaim then
             pcall(CastFishingRod)
         end
-        task.wait(0.5) -- Check interval
+        task.wait(0.1) -- Reduced check interval for responsiveness
     end
+
     print("🛑 Auto fishing stopped")
 
-    -- Stop all animations when stopping
     pcall(function()
         if RodAnimShake then RodAnimShake:Stop() end
         if RodAnimReel then RodAnimReel:Stop() end
         if RodAnimIdle then RodAnimIdle:Stop() end
     end)
 
+    -- Reset player state
     if Humanoid then
         for _, track in ipairs(Humanoid:GetPlayingAnimationTracks()) do
             track:Stop()
@@ -219,28 +215,54 @@ function TeleportPlayerToIsland(islandName)
 end
 
 function GetRodNames()
-    local Display = CurrentPlayer:WaitForChild("Backpack"):WaitForChild("Display")
+    local Display = CurrentPlayer.PlayerGui:WaitForChild("Backpack"):WaitForChild("Display")
     for _, item in ipairs(Display:GetChildren()) do
-        local Name = item.Inner.Tags.ItemName
-        if Name and Name.IsA("TextLabel") then
-            local RodName = Name.Text
-            return RodName
+        local success, ItemNamePath = pcall(function()
+            return item.Inner.Tags.ItemName
+        end)
+
+        if success and ItemNamePath and ItemNamePath:IsA("TextLabel") then
+            local Name = tostring(ItemNamePath.Text)
+            print("Current Rod: " .. Name)
+            return Name
+        else
+            warn("⚠️ Unable to retrieve ItemName from item: " .. tostring(item.Name))
         end
     end
 end
 
-(function()
-    for _, island in ipairs(DataIslands.locations) do
-        if island.name and island.coordinated then
-            table.insert(DataIslandsName, island.name)
-        end
-    end
-end)()
+CurrentPlayer.CharacterAdded:Connect(function(char)
+    Character = char
+    Humanoid = char:WaitForChild("Humanoid", 5)
 
-(function()
-    for _, island in ipairs(DataDelay.rods) do
-        if island.name == GetRodNames() then
-            print(island)
-        end
+    if Humanoid then
+        Animator = Humanoid:FindFirstChildOfClass("Animator") or Instance.new("Animator", Humanoid)
+        pcall(function()
+            RodAnimIdle = SafeLoadAnimation(Animator, RodIdle)
+            RodAnimShake = SafeLoadAnimation(Animator, RodShake)
+            RodAnimReel = SafeLoadAnimation(Animator, RodReel)
+        end)
+
+        task.spawn(function()
+            task.wait(1) -- Wait a bit for GUI/Backpack to populate
+            SetRodDelay() -- Use the improved SetRodDelay function from previous help
+        end)
     end
-end)()
+end)
+
+    (function()
+        local RodName = GetRodNames()
+        for _, island in ipairs(DataIslands.locations) do
+            if island.name and island.coordinated then
+                table.insert(DataIslandsName, island.name)
+            end
+        end
+
+        for _, island in ipairs(DataDelay.rods) do
+            if island.name == RodName then
+                MiniGameDelay = island.MiniGameDelay
+                ByPassMiniGame = island.BypassDelay
+                print(island.name, island.MiniGameDelay, island.BypassDelay)
+            end
+        end
+    end)()

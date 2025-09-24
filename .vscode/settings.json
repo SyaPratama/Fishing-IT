@@ -8,10 +8,12 @@
         "Color3",
         "Vector2",
         "UDim2",
-        "workspace"
+        "workspace",
+        "fishObtained"
     ],
     "Lua.diagnostics.disable": [
         "deprecated",
-        "undefined-global"
+        "undefined-global",
+        "unbalanced-assignments"
     ]
 }

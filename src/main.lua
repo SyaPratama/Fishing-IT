@@ -1,6 +1,5 @@
 loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/refs/heads/main/config/config.lua"))()
 loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/refs/heads/main/utils/main.lua"))()
-
 -- UI Sections
 local Main = Window:Section({
     Title = "Main",
@@ -25,6 +24,12 @@ local TeleportTab = Main:Tab({
     IconThemed = "Oceanic"
 })
 
+local ShopTab = Main:Tab({
+    Title = "Shop",
+    Icon = "shopping-cart",
+    IconThemed = "Oceanic",
+})
+
 local ToolTab = Main:Tab({
     Title = "Tools",
     Icon = "wrench",
@@ -38,12 +43,6 @@ local SettingTab = Utility:Tab({
 })
 
 -- UI Elements
-HomeTab:Section({
-    Title = "Home Section",
-    TextXAlignment = "Left",
-    TextSize = 20
-})
-
 HomeTab:Section({
     Title = "Main",
     TextXAlignment = "Left",
@@ -109,12 +108,6 @@ if ActiveDrowning then
 end
 
 TeleportTab:Section({
-    Title = "Teleport Section",
-    TextXAlignment = "Left",
-    TextSize = 20
-})
-
-TeleportTab:Section({
     Title = "Teleport",
     TextXAlignment = "Left",
     TextSize = 16
@@ -128,16 +121,4 @@ TeleportTab:Dropdown({
     Callback = function(option)
         return TeleportPlayerToIsland(option)
     end
-})
-
-ToolTab:Section({
-    Title = "Tools Section",
-    TextXAlignment = "Left",
-    TextSize = 20
-})
-
-SettingTab:Section({
-    Title = "Setting Section",
-    TextXAlignment = "Left",
-    TextSize = 20
 })

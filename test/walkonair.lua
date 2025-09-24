@@ -7,6 +7,9 @@ local character = player.Character or player.CharacterAdded:Wait()
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 local humanoid = character:WaitForChild("Humanoid")
 
+humanoid.JumpPower = 16
+humanoid.Jump = true
+
 -- Variabel
 local airwalkEnabled = false
 local offset = -6 -- jarak platform di bawah player

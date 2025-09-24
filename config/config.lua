@@ -80,8 +80,7 @@ IslandJSON = game:HttpGetAsync(
 DataIslands = HttpService:JSONDecode(IslandJSON)
 DataIslandsName = {}
 
-DelayJSON = game:HttpGetAsync(
-    "https://raw.githubusercontent.com/SyaPratama/Fishing-IT/refs/heads/main/data/delay.json")
+DelayJSON = game:HttpGetAsync("https://raw.githubusercontent.com/SyaPratama/Fishing-IT/refs/heads/main/data/delay.json")
 DataDelay = HttpService:JSONDecode(DelayJSON)
 
 -- Variables
@@ -106,13 +105,38 @@ Humanoid = Character:WaitForChild("Humanoid", 10)
 
 
 -- Anim
+RodEasyReel = ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Animations"):WaitForChild("EasyFishReel")
+RodEasyReelStart = ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Animations"):WaitForChild("EasyFishReelStart")
 RodIdle = ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Animations"):WaitForChild("FishingRodReelIdle")
+RodCharacterIdle = ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Animations")
+    :WaitForChild("FishingRodCharacterIdle2")
+RodFinishChargeOneHand = ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Animations")
+    :WaitForChild("FinishChargingRod1Hand")
 RodReel = ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Animations"):WaitForChild("EasyFishReelStart")
 RodShake = ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Animations"):WaitForChild(
     "CastFromFullChargePosition1Hand")
+StartChargeRodOneHand = ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Animations")
+    :WaitForChild("StartChargingRod1Hand")
 Animator = Humanoid:FindFirstChildOfClass("Animator") or Instance.new("Animator", Humanoid)
 
--- Animation Tracks
-RodAnimIdle = Animator:LoadAnimation(RodIdle)
-RodAnimShake = Animator:LoadAnimation(RodShake)
-RodAnimReel = Animator:LoadAnimation(RodReel)
+-- safely Load Animations
+function SafeLoadAnimation(animator, animation)
+    if not animation then
+        warn("⚠️ Animation is nil")
+        return nil
+    end
+    if not animation.AnimationId or animation.AnimationId == "" then
+        warn("⚠️ AnimationId is missing for: " .. animation.Name)
+        return nil
+    end
+    local track = animator:LoadAnimation(animation)
+    if not track then
+        warn("⚠️ Failed to load animation track for: " .. animation.Name)
+    end
+    return track
+end
+
+-- Load Animations Safely
+RodAnimIdle = SafeLoadAnimation(Animator, RodIdle)
+RodAnimShake = SafeLoadAnimation(Animator, RodShake)
+RodAnimReel = SafeLoadAnimation(Animator, RodReel)
